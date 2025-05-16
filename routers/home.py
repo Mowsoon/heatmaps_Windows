@@ -7,7 +7,7 @@ router = APIRouter(
 )
 
 @router.get("/")
-async def index(request: Request):
+async def root(request: Request):
     lang, translations = find_language("home", request)
 
     return template.TemplateResponse(
