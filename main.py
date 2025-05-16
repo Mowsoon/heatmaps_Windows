@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from routers import home, change_language
+from routers import home, plans, change_language
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(home.router)
+app.include_router(plans.router)
 app.include_router(change_language.router)
+
 
 if __name__ == "__main__":
     import uvicorn
