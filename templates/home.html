@@ -77,6 +77,19 @@
             </div>
         </div>
     </section>
+    <section class="benefits">
+        <div class="container">
+            <h2>{{ translations.benefits.title }}</h2>
+            <div class="benefits-grid">
+                {% for i in translations.benefits["items"] %}
+                    <div class="benefit-item">
+                        <h3>{{ i.title }}</h3>
+                        <p>{{ i.desc }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
