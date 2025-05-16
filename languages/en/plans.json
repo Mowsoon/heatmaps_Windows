@@ -1,0 +1,18 @@
+{
+    "header": {
+      "button": "← Go back",
+      "tagline": "Wi-Fi Network Analysis and Management"
+    },
+    "upload_section": {
+      "title": "Download your plan",
+      "button": "Choose File"
+    },
+    "existing_maps": {
+      "title": "Existing Maps",
+      "Visualise": "Visualise"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+}
+
