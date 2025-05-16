@@ -1,0 +1,181 @@
+/* Plan Page Styles */
+
+/* Header Adjustment */
+.plans-header {
+    background-color: var(--color-black);
+    padding: 2rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--color-gold-dark);
+    position: relative;
+}
+
+.go-back {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+.go-back-button {
+    background-color: var(--color-dark);
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.go-back-button:hover {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Upload Section */
+.upload_section {
+    background-color: var(--color-dark);
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.upload_section h2 {
+    color: var(--color-gold);
+    margin-bottom: 2rem;
+}
+
+.upload-btn {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.upload-btn:hover {
+    background-color: var(--color-gold-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Existing Maps Section */
+.existing-maps {
+    padding: 5rem 0;
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.existing-maps h2 {
+    text-align: center;
+    color: var(--color-gold);
+    margin-bottom: 3rem;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.map-card {
+    background-color: var(--color-dark);
+    border: 1px solid var(--color-gray);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.map-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-gold-dark);
+}
+
+.map-card h3 {
+    color: var(--color-gold-light);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.map-preview {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.map-preview img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    max-height: 180px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--color-gold);
+    transition: transform var(--transition-fast);
+}
+
+.delete-btn:hover {
+    transform: scale(1.2);
+    color: var(--color-gold-light);
+}
+
+.map-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.map-actions a {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--transition-normal), transform var(--transition-fast);
+}
+
+.btn-scan {
+    background-color: var(--color-gold-dark);
+    color: var(--color-black);
+}
+
+.btn-scan:hover {
+    background-color: var(--color-gold);
+    transform: translateY(-2px);
+}
+
+.btn-visualise {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+}
+
+.btn-visualise:hover {
+    background-color: var(--color-gold-light);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .map-actions {
+        flex-direction: column;
+    }
+}
