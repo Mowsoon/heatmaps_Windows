@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Heatmap</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Hello World</h1>
+    <header>
+        <div class="container">
+            <h1>WiFi Heatmap</h1>
+            <p class="tagline">{{ translations.header.tagline }}</p>
+        </div>
+        <div class="language-selector">
+            {% if current_language == 'fr' %}
+                <a href="/change_language/en?next=/" class="lang-button">{{ translations.header.lang_en }}</a>
+            {% else %}
+                <a href="/change_language/fr?next=/" class="lang-button">{{ translations.header.lang_fr }}</a>
+            {% endif %}
+        </div>
+    </header>
+
 </body>
 </html>
