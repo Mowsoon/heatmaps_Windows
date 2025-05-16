@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request
-from config import templates
+from config import template
 from helpers.html_handler import find_language
 router = APIRouter(
     tags = ["Home"],
@@ -7,13 +7,14 @@ router = APIRouter(
 )
 
 @router.get("/")
-async def root(request: Request):
-    languages, translation = find_language("home", request)
-    return templates.TemplateResponse(
-        name    = "home.html",
-        context = {
+async def index(request: Request):
+    lang, translations = find_language("home", request)
+
+    return template.TemplateResponse(
+        name="home.html",
+        context={
             "request": request,
-            "current_language": languages,
-            "translations": translation
+            "translations": translations,
+            "current_lang": lang
         }
     )
