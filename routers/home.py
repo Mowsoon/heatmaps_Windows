@@ -1,5 +1,5 @@
-from fastapi import APIRouter
-
+from fastapi import APIRouter, Request
+from config import templates
 
 router = APIRouter(
     tags = ["Home"],
@@ -7,5 +7,10 @@ router = APIRouter(
 )
 
 @router.get("/")
-async def root():
-    return {"message": "Hello World"}
+async def root(request: Request):
+    return templates.TemplateResponse(
+        name    = "home.html",
+        context = {
+            "request": request
+        }
+    )
