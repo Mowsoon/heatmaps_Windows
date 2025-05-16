@@ -2,8 +2,8 @@ from fastapi import APIRouter
 
 
 router = APIRouter(
-    prefix = "/",
-    tags = ["Home"]
+    tags = ["Home"],
+    responses={404: {"description": "Not found"}}
 )
 
 @router.get("/")
