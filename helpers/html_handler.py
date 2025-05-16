@@ -9,7 +9,7 @@ def find_language(html_page_name: str,request: Request):
     if not language_path.exists():
         language_path = Path(f"languages/en/{html_page_name}.json")
 
-    with open(language_path, "r") as f:
+    with open(language_path, "r", encoding="utf-8") as f:
         translation = json.load(f)
 
     return language, translation

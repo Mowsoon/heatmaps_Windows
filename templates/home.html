@@ -16,11 +16,11 @@
             <p class="tagline">{{ translations.header.tagline }}</p>
         </div>
         <div class="language-selector">
-            {% if current_language == 'fr' %}
-                <a href="/change_language/en?next=/" class="lang-button">{{ translations.header.lang_en }}</a>
-            {% else %}
-                <a href="/change_language/fr?next=/" class="lang-button">{{ translations.header.lang_fr }}</a>
-            {% endif %}
+        {% if current_language == 'fr' %}
+            <a href="/change_language/en?next=/" class="lang-button lang-button-en">EN</a>
+        {% else %}
+            <a href="/change_language/fr?next=/" class="lang-button lang-button-fr">FR</a>
+        {% endif %}
         </div>
     </header>
     <section class="hero">
@@ -99,7 +99,7 @@
     </section>
     <footer>
         <div class="container">
-            <p>&copy; {{ translations.footer.copyright }}</p>
+            <p>{{ translations.footer.copyright }}</p>
         </div>
     </footer>
 </body>
