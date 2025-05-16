@@ -1,0 +1,38 @@
+{
+    "header": {
+      "tagline": "Wi-Fi Network Analysis and Management",
+      "lang_switch_fr": "🇫🇷 Français"
+    },
+    "hero": {
+      "heading": "Visualize and Optimize Your Wi-Fi Coverage",
+      "description": "An elegant solution to map, analyze, and optimize your wireless networks with precision.",
+      "button": "User Guide"
+    },
+    "features": {
+      "title_1": "Plan Management",
+      "desc_1": "Add and manage your network floor plans for precise Wi-Fi coverage control.",
+      "title_2": "Wi-Fi Scan",
+      "desc_2": "Launch interactive scans to gather Wi-Fi network data at each location.",
+      "title_3": "Heatmaps",
+      "desc_3": "Explore detailed heatmaps to analyze signal quality across different areas."
+    },
+    "benefits": {
+      "title": "Why Choose this Solution",
+      "items": [
+        { "title": "Accuracy", "desc": "Get precise signal strength measurements to optimize your network." },
+        { "title": "Simplicity", "desc": "Intuitive interface for quick and efficient onboarding without technical expertise." },
+        { "title": "Visualization", "desc": "Turn complex data into clear, actionable visualizations." },
+        { "title": "Adaptability", "desc": "Suitable for nomadic environments that don't require additional infrastructure." }
+      ]
+    },
+    "cta": {
+      "heading": "Ready to Optimize Your Wi-Fi Network?",
+      "description": "Start mapping and analyzing your network coverage now.",
+      "button": "Get Started"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+  }
+
+
