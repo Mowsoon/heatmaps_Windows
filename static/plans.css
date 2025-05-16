@@ -125,15 +125,15 @@
     right: 8px;
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    color: var(--color-gold);
+    color: var(--color-dark-red);
     transition: transform var(--transition-fast);
 }
 
 .delete-btn:hover {
     transform: scale(1.2);
-    color: var(--color-gold-light);
+    color: var(--color-red);
 }
 
 .map-actions {
