@@ -1,0 +1,38 @@
+{
+    "header": {
+      "tagline": "Analyse et gestion des réseaux Wi-Fi",
+      "lang_switch_en": "🇬🇧 English"
+    },
+    "hero": {
+      "heading": "Visualisez et optimisez votre couverture Wi-Fi",
+      "description": "Une solution élégante pour cartographier, analyser et optimiser vos réseaux sans fil avec précision.",
+      "button": "Guide d'utilisation"
+    },
+    "features": {
+      "title_1": "Gestion des plans",
+      "desc_1": "Ajoutez et gérez vos plans réseau pour une gestion précise de votre couverture Wi-Fi.",
+      "title_2": "Scan Wi-Fi",
+      "desc_2": "Lancez des scans interactifs pour obtenir des informations sur les réseaux Wi-Fi à chaque position.",
+      "title_3": "Heatmaps",
+      "desc_3": "Explorez des cartes thermiques détaillées pour analyser la qualité du signal à différents endroits."
+    },
+    "benefits": {
+      "title": "Pourquoi choisir cette solution",
+      "items": [
+        {"title": "Précision", "desc": "Obtenez des mesures précises de la puissance du signal pour optimiser votre réseau."},
+        {"title": "Simplicité", "desc": "Interface intuitive pour une prise en main rapide et efficace ne nécessitant pas de connaissances techniques."},
+        {"title": "Visualisation", "desc": "Transformez des données complexes en visualisations claires et exploitables."},
+        {"title": "Adaptabilité", "desc": "Solution adaptée aux environnements nomades qui ne demande pas d'infrastructure supplémentaire."}
+      ]
+    },
+    "cta": {
+      "heading": "Prêt à optimiser votre réseau Wi-Fi ?",
+      "description": "Commencez dès maintenant à cartographier et analyser votre couverture réseau.",
+      "button": "Commencer"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."
+    }
+  }
+
+
