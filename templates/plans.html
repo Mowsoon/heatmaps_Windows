@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WiFi Heatmap</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="/static/home.css">
+        <link rel="stylesheet" href="/static/plans.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="plans-header">
+            <div class="go-back">
+                <a href="/" class="go-back-button">{{ translations.header.button }}</a>
+            </div>
+            <div class="container">
+                <h1>WiFi Heatmap</h1>
+                <p class="tagline">{{ translations.header.tagline }}</p>
+            </div>
+            <div class="language-selector">
+            {% if current_lang == 'fr' %}
+                <a href="/change_language/en?next=/plans" class="lang-button lang-button-en">EN</a>
+            {% else %}
+                <a href="/change_language/fr?next=/plans" class="lang-button lang-button-fr">FR</a>
+            {% endif %}
+            </div>
+        </header>
+
+        <section class="upload_section">
+            <div class="container">
+                <h2>{{ translations.upload_section.title }}</h2>
+                <form id="uploadForm" action="/plans" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" style="display: none;" onchange="document.getElementById('uploadForm').submit();">
+                </form>
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click();">{{ translations.upload_section.button }}</button>
+                <input type="file" id="fileInput" style="display: none;">
+            </div>
+        </section>
+
+        <section class="existing-maps">
+            <div class="container">
+                <h2>{{ translations.existing_maps.title }}</h2>
+
+                <div class="map-grid">
+                    {% for map in maps %}
+                    <div class="map-card" data-map-name="{{ map.name }}">
+                        <h3>{{ map.name }}</h3>
+                        <div class="map-preview">
+                             <img src="{{ map.preview_url }}" alt="{{ map.name }}">
+                             <button class="delete-btn" title="Delete map">🗑</button>
+                        </div>
+                        <div class="map-actions">
+                            <a href="/scans/{{ map.name }}" class="btn-scan">Scan</a>
+                            <a href="/maps/{{ map.name }}" class="btn-visualise">{{ translations.existing_maps.Visualise }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; {{ translations.footer.copyright }}</p>
+            </div>
+        </footer>
+    </body>
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const card = event.target.closest('.map-card');
+                const mapName = card.dataset.mapName;
+
+                if (!mapName) {
+                    alert("Map name not found.");
+                    return;
+                }
+
+                if (!confirm(`Are you sure you want to delete "${mapName}"?`)) return;
+
+                try {
+                    const response = await fetch(`/plans/${mapName}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        card.remove();  // Supprime la carte du DOM
+                    } else {
+                        alert("Failed to delete map.");
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred while deleting the map.");
+                }
+            });
+        });
+    </script>
+
+
+</html>
+
