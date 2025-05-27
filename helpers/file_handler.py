@@ -1,6 +1,6 @@
 from fastapi import File, UploadFile, status
 from fastapi.responses import RedirectResponse, JSONResponse
-from config import MAPS_DIR, PREVIEWS_DIR, MAPS_ALLOWED_EXTENSIONS
+from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS
 from pathlib import Path
 
 
