@@ -25,7 +25,7 @@ def generate_preview():
     for file in MAPS_DIR.iterdir():
         if file.suffix.lower() in [".jpg", ".jpeg", ".png"]:
             maps.append({
-                "name": name,
-                "preview_url": f"{MAPS_DIR}{file.name}"
+                "name": file.stem,
+                "preview_url": f"/static/maps/{file.name}"
             })
     return maps

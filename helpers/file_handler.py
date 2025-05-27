@@ -2,6 +2,7 @@ from fastapi import File, UploadFile, status
 from fastapi.responses import RedirectResponse, JSONResponse
 from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS
 from pathlib import Path
+from pdf2image import convert_from_bytes
 
 
 def load_file(pagename: str, file: UploadFile = File(...)):
@@ -14,21 +15,33 @@ def load_file(pagename: str, file: UploadFile = File(...)):
     if file_path.exists():
         return RedirectResponse(url=pagename, status_code=status.HTTP_409_CONFLICT)
 
-    with open(file_path, "wb") as f:
-        f.write(file.file.read())
+    if ext == ".pdf":
+        name = Path(file.filename).stem
+        file_path = MAPS_DIR / f"{name}.png"
+        if file_path.exists():
+            return RedirectResponse(url=pagename, status_code=status.HTTP_409_CONFLICT)
+
+        pdf_bytes = file.file.read()
+        images = convert_from_bytes(pdf_bytes, first_page=1, last_page=1)
+        if images:
+            image = images[0]
+            if image.height > image.width:
+                image = image.rotate(90, expand=True)
+            MAPS_DIR.mkdir(parents=True, exist_ok=True)
+            image.save(str(file_path), "PNG")
+    else:
+        MAPS_DIR.mkdir(parents=True, exist_ok=True)
+        with open(file_path, "wb") as f:
+            f.write(file.file.read())
 
     return RedirectResponse(url=pagename, status_code=status.HTTP_303_SEE_OTHER)
 
 
 def delete_file(map_name: str):
-    for ext in [".png", ".jpg", ".jpeg", ".pdf"]:
+    for ext in [".png", ".jpg", ".jpeg"]:   
         map_file = MAPS_DIR / f"{map_name}{ext}"
         if map_file.exists():
             map_file.unlink()
-
-    preview_file = PREVIEWS_DIR / f"{map_name}.png"
-    if preview_file.exists():
-        preview_file.unlink()
 
     return JSONResponse(content={"status": "deleted"}, status_code=status.HTTP_200_OK)
 
