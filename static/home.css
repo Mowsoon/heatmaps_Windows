@@ -84,7 +84,7 @@ header {
 /* Hero Section */
 .hero {
     background-color: var(--color-dark);
-    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('/static/font/home_hero.png');
     background-size: cover;
     background-position: center;
     padding: 6rem 0;
