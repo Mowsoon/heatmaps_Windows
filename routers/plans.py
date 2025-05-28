@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, File, UploadFile
-from config import template, MAPS_DIR
+from config import template
 from helpers.html_handler import generate_preview, find_language
 from helpers.file_handler import load_file, delete_file
 
