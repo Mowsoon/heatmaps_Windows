@@ -1,13 +1,15 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from routers import home, plans, change_language
+from routers import home, plans, scans, change_language, data
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(home.router)
 app.include_router(plans.router)
+app.include_router(scans.router)
 app.include_router(change_language.router)
+app.include_router(data.router)
 
 
 if __name__ == "__main__":
