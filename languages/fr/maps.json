@@ -1,0 +1,21 @@
+{
+    "header":{
+        "button":"← Revenir en arrière",
+        "tagline":"Analyse et gestion des réseaux Wi-Fi",
+        "lang_switch_en":"🇬🇧 English"
+    },
+    "main_title":{
+        "title":"Choisissez une carte à visualiser"
+    },
+    "existing_maps":{
+        "title": "Cartes disponibles",
+        "visualise": "Visualiser"
+    },
+    "add_scan":{
+      "title": "Vous ne trouvez pas votre carte? Faites-en une ici.",
+      "button": "Aller à la page Scan"
+    },
+    "footer":{
+        "copyright":"© 2025 WiFi Heatmap. Tous droits réservés."
+    }
+}
