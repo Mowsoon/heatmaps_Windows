@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WiFi Heatmap - Analyse et gestion des réseaux Wi-Fi</title>
+        <link rel="stylesheet" href="/static/home.css">
+        <link rel="stylesheet" href="/static/plans.css">
+        <link rel="stylesheet" href="/static/scans.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="scan-header">
+            <div class="go-back">
+                <a href="/" class="go-back-button">{{ translations.header.button }}</a>
+            </div>
+            <div class="container">
+                <h1>WiFi Heatmap</h1>
+                <p class="tagline">{{ translations.header.tagline }}</p>
+            </div>
+            <div class="language-selector">
+                {% if current_lang == 'fr' %}
+                    <a href="/change_language/en?next=/scans" class="lang-button lang-button-en">EN</a>
+                {% else %}
+                    <a href="/change_language/fr?next=/scans" class="lang-button lang-button-fr">FR</a>
+                {% endif %}
+            </div>
+        </header>
+        <section class="scans-main-title">
+            <h2>{{ translations.main_title.title }}</h2>
+            <p>{{ translations.main_title.note }}</p>
+        </section>
+
+        <section class="existing-maps">
+            <div class="container">
+                
+                <div class="map-grid">
+                    {% for map in maps %}
+                    <div class="map-card">       
+                        <h3>{{ map.name }}</h3>
+                        <div class="map-preview">
+                             <img src="{{ map.preview_url }}" alt="{{ map.name }}">
+                        </div>
+                        <div class="map-actions">
+                            <a href="/scans/{{ map.name }}" class="btn-scan">Scan</a>
+                            <button class="btn-save" onclick="saveJSON('{{ map.name }}')">
+                                {{ translations.existing_maps.Save }}
+                            </button>
+                            <input type="file" id="jsonInput-{{ map.name }}" name="file" accept=".json" style="display: none;" onchange="uploadJSON('{{ map.name }}', this.files[0])">
+                            <button class="btn-load" onclick="document.getElementById('jsonInput-{{ map.name }}').click();">
+                                {{ translations.existing_maps.Load }}
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="upload_section">
+            <div class="container">
+                <h2>{{ translations.upload_section.title }}</h2>
+                <form id="uploadForm" action="/scans" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" style="display: none;" onchange="document.getElementById('uploadForm').submit();">
+                </form>
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click();">{{ translations.upload_section.button }}</button>
+                <input type="file" id="fileInput" style="display: none;">
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <p>{{ translations.footer.copyright }}</p>
+            </div>
+       </footer>
+    </body>
+    <script>
+        async function uploadJSON(mapName, file) {
+            const formData = new FormData();
+            formData.append("file", file);
+        
+            const response = await fetch(`/load/${mapName}`, {
+                method: "POST",
+                body: formData
+            });
+        
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert("Upload failed: invalid file type or server error.");
+            }
+        }
+        async function saveJSON(mapName) {
+            try {
+                const response = await fetch(`/save/${mapName}`);
+                if (!response.ok) throw new Error("Network response was not ok");
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${mapName}.json`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                alert("Download failed.");
+                console.error(error);
+            }
+        }
+
+ 
+    </script>
+</html>
