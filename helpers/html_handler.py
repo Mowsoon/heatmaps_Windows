@@ -1,6 +1,6 @@
 from fastapi import Request
 from pathlib import Path
-from config import MAPS_DIR
+from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS, MAPS_POSSIBLE_EXTENSIONS, DATA_DIR
 import json
 
 def find_language(html_page_name: str,request: Request):
@@ -23,9 +23,20 @@ def find_language(html_page_name: str,request: Request):
 def generate_preview():
     maps = []
     for file in MAPS_DIR.iterdir():
-        if file.suffix.lower() in [".jpg", ".jpeg", ".png"]:
+        if file.suffix.lower() in MAPS_POSSIBLE_EXTENSIONS:
             maps.append({
                 "name": file.stem,
                 "preview_url": f"/static/maps/{file.name}"
             })
     return maps
+
+def list_data():
+    data = []
+    for file in DATA_DIR.iterdir():
+        if file.suffix.lower() == ".json":
+            for ext in MAPS_POSSIBLE_EXTENSIONS:
+                corresponding_map = MAPS_DIR / (file.stem + ext)
+                if corresponding_map.exists():
+                    data.append({"name": file.stem})
+                    break 
+    return data
