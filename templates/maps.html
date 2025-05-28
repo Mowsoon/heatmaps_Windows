@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WiFi Heatmap - Analyse et gestion des réseaux Wi-Fi</title>
+        <link rel="stylesheet" href="/static/home.css">
+        <link rel="stylesheet" href="/static/plans.css">
+        <link rel="stylesheet" href="/static/maps.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="maps-header">
+            <div class="go-back">
+                <a href="/" class="go-back-button">{{ translations.header.button }}</a>
+            </div>
+            <div class="container">
+                <h1>WiFi Heatmap</h1>
+                <p class="tagline">{{ translations.header.tagline }}</p>
+            </div>
+            <div class="language-selector">
+                {% if current_lang == 'fr' %}
+                    <a href="/change_language/en?next=/maps" class="lang-button lang-button-en">EN</a>
+                {% else %}
+                    <a href="/change_language/fr?next=/maps" class="lang-button lang-button-fr">FR</a>
+                {% endif %}
+                </div>
+        </header>
+        <section class="maps-main-title">
+            <h2>{{ translations.main_title.title }}</h2>
+        </section>
+
+        <section class="existing-maps">
+            <div class="container">
+                <h2>{{ translations.existing_maps.title }}</h2>
+                
+                <div class="map-grid">
+                    {% for map in maps %}
+                    <div class="map-card">       
+                        <h3>{{ map.name }}</h3>
+                        <div class="map-actions">
+                            <a href="/maps/{{ map.name }}" class="btn-visualise">{{ translations.existing_maps.visualise }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="add-scan">
+            <div class="container">
+                <h2>{{ translations.add_scan.title }}</h2>
+                <a href="/scans" class="btn-go-scan">{{ translations.add_scan.button }}</a>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <p>&copy; {{ translations.footer.copyright }}</p>
+            </div>
+        </footer>
+    </body>
+
+
+</html>
