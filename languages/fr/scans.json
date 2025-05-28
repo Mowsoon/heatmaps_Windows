@@ -1,0 +1,21 @@
+{
+    "header":{
+        "button":"← Revenir en arrière",
+        "tagline":"Analyse et gestion des réseaux Wi-Fi"
+    },
+    "main_title":{
+        "title":"Choisissez un plan pour commencer votre scan Wi-Fi",
+        "note":"Note: Lancer un nouveau scan remplacera le précédent"
+    },
+    "existing_maps":{
+        "Save":"Sauvegarder",
+        "Load":"Charger"
+    },
+    "upload_section":{
+        "title":"Vous ne trouvez pas votre plan? Telechargez-le ici.",
+        "button":"Télécharger un plan"
+    },
+    "footer":{
+        "copyright":"© 2025 WiFi Heatmap. Tous droits réservés."
+    }
+}
