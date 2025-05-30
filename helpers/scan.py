@@ -19,7 +19,8 @@ def get_band(freq):
     else:
         return "Unknown"
 
-def extract_ssid(result):
+def extract_ssid():
+    result = wifi_scan()
     ssid_seen = {}
     for network in result:
         ssid = network.ssid
@@ -36,5 +37,4 @@ def extract_ssid(result):
                 "signal": signal,
                 "band": band
             }
-
     return ssid_seen.values()
