@@ -18,3 +18,23 @@ def get_band(freq):
         return "6GHz"
     else:
         return "Unknown"
+
+def extract_ssid(result):
+    ssid_seen = {}
+    for network in result:
+        ssid = network.ssid
+        bssid = network.bssid
+        signal = network.signal
+        freq = network.freq / 1000
+        band = get_band(freq)
+
+        key = (ssid, band)
+        if key not in ssid_seen or ssid_seen[key]["signal"] < signal:
+            ssid_seen[key] = {
+                "ssid": ssid,
+                "bssid": bssid,
+                "signal": signal,
+                "band": band
+            }
+
+    return ssid_seen.values()
