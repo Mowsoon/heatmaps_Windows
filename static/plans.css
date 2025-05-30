@@ -40,6 +40,7 @@
     background-color: var(--color-dark);
     padding: 4rem 0;
     text-align: center;
+    border-bottom: 1px solid var(--color-gold-dark);
 }
 
 .upload_section h2 {
@@ -143,29 +144,58 @@
     margin-top: 1rem;
 }
 
-.map-actions a {
+.map-actions button {
     flex: 1;
-    text-align: center;
     padding: 0.6rem;
     border-radius: 30px;
     font-weight: 600;
+    text-align: center;
+    border: none;
+    cursor: pointer;
     text-decoration: none;
     transition: background-color var(--transition-normal), transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.map-actions button:hover {
+    transform: translateY(-2px);
 }
 
 .btn-scan {
     background-color: var(--color-gold-dark);
-    color: var(--color-black);
+    color: var(--color-dark);
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1em;  
+    text-decoration: none;
+    flex: 1;
+    text-align: center;
+    margin: 0 5px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
 }
 
 .btn-scan:hover {
     background-color: var(--color-gold);
     transform: translateY(-2px);
-}
+}  
 
 .btn-visualise {
     background-color: var(--color-gold);
     color: var(--color-black);
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1em;  
+    text-decoration: none;
+    flex: 1;
+    text-align: center;
+    margin: 0 5px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
 }
 
 .btn-visualise:hover {

@@ -1,0 +1,21 @@
+{
+    "header": {
+      "button": "← Go back",
+      "tagline": "Wi-Fi Network Analysis and Management",
+      "lang_switch_fr": "🇫🇷 Français"
+    },
+    "main_title": {
+        "title": "Choose the Heatmap you want to visualise"
+    },
+    "existing_maps":{
+        "title": "Available Heatmaps",
+        "visualise": "Visualise"
+    },
+    "add_scan":{
+      "title": "Can't find your heatmap? Make one here.",
+      "button": "Go to the Scan page"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "header": {
+      "button": "← Go back",
+      "tagline": "Wi-Fi Network Analysis and Management"
+    },
+    "main_title": {
+      "title": "Choose a map to begin your Wi-Fi scan",
+      "note": "Note: Starting a new scan will replace previous data"
+    },
+    "existing_maps": {
+      "Save": "Save",
+      "Load": "Load"
+    },
+    "upload_section": {
+      "title": "Can’t find your map? Upload it here.",
+      "button": "Upload a Map"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+
+}
