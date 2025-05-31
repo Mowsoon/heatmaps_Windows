@@ -31,7 +31,11 @@
 
   <section class="map-actions">
     <p id="clickCoords">{{ translations.map_action.action }}</p>
+
     <div class="image-wrapper">
+        <div id="scanProgress" class="scan-progress hidden">
+            <div class="scan-bar"></div>
+        </div>
         <img id="mapImage" src="{{ map_url }}" alt="{{ map_name }}">
     </div>
     <div class="map-actions-buttons">
@@ -48,26 +52,40 @@
 
   <script>
     const mapImage = document.getElementById('mapImage');
+    const scanProgress = document.getElementById('scanProgress');
+
+    let isScanning = false;
 
     mapImage.addEventListener('click', async (e) => {
+        if (isScanning) return;
+
         const rect = mapImage.getBoundingClientRect();
         const x = Math.round((e.clientX - rect.left) * (mapImage.naturalWidth / mapImage.clientWidth));
         const y = Math.round((e.clientY - rect.top) * (mapImage.naturalHeight / mapImage.clientHeight));
 
-        // Send POST request
-        const response = await fetch(window.location.pathname, {
+
+        isScanning = true;
+        scanProgress.classList.remove("hidden");
+        scanProgress.innerHTML = '<div class="scan-bar"></div>';
+
+
+        try { const response = await fetch(window.location.pathname, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ x, y })
+            body: JSON.stringify({x, y})
         });
+        const data = await response.json();
+        console.log(data);
+        } catch (error) {
+            console.error(error);
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log("Scan saved:", result);
-        } else {
-            console.error("Failed to send scan position.");
+        } finally {
+            setTimeout(() => {
+                scanProgress.classList.add("hidden");
+                isScanning = false;
+            });
         }
     });
     </script>
