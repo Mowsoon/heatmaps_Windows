@@ -1,0 +1,13 @@
+{
+  "header": {
+    "button": "← Revenir en arrière",
+    "tagline": "Analyse et gestion des réseaux Wi-Fi"
+  },
+  "map_action": {
+    "action": "Indiquez votre position pour initier un scan",
+    "button": "Finir de scanner"
+  },
+  "footer": {
+    "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."
+  }
+}

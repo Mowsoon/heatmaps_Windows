@@ -1,0 +1,13 @@
+{
+    "header": {
+      "button": "← Go back",
+      "tagline": "Wi-Fi Network Analysis and Management"
+    },
+    "map_action": {
+      "action": "Click on your position to initiate a scan.",
+      "button": "Finish Scans"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+}
