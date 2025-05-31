@@ -46,3 +46,9 @@ def delete_file(map_name: str):
     return JSONResponse(content={"status": "deleted"}, status_code=status.HTTP_200_OK)
 
 
+def find_map_url(map_name: str):
+    for ext in [".png", ".jpg", ".jpeg"]:
+        map_file = MAPS_DIR / f"{map_name}{ext}"
+        if map_file.exists():
+            return f"/static/maps/{map_name}{ext}"
+    return None
