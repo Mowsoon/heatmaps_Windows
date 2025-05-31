@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Heatmap</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/plans.css">
+    <link rel="stylesheet" href="/static/scan_map.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="plans-header">
+      <div class="go-back">
+          <a href="/" class="go-back-button">{{ translations.header.button }}</a>
+      </div>
+      <div class="container">
+          <h1>WiFi Heatmap</h1>
+          <p class="tagline">{{ translations.header.tagline }}</p>
+      </div>
+      <div class="language-selector">
+            {% if current_lang == 'fr' %}
+                <a href="/change_language/en?next=/scans/{{ map_name }}" class="lang-button lang-button-en">EN</a>
+            {% else %}
+                <a href="/change_language/fr?next=/scans/{{ map_name }}" class="lang-button lang-button-fr">FR</a>
+            {% endif %}
+            </div>
+  </header>
+
+  <section class="map-actions">
+    <p id="clickCoords">{{ translations.map_action.action }}</p>
+    <div class="image-wrapper">
+        <img id="mapImage" src="{{ map_url }}" alt="{{ map_name }}">
+    </div>
+    <div class="map-actions-buttons">
+        <a href="/maps" class="btn-end">{{ translations.map_action.button }}</a>
+    </div>
+
+  </section>
+  <footer>
+    <div class="container">
+        <p>{{ translations.footer.copyright }}</p>
+    </div>
+  </footer>
+
+
+  <script>
+    const mapImage = document.getElementById('mapImage');
+
+    mapImage.addEventListener('click', async (e) => {
+        const rect = mapImage.getBoundingClientRect();
+        const x = Math.round((e.clientX - rect.left) * (mapImage.naturalWidth / mapImage.clientWidth));
+        const y = Math.round((e.clientY - rect.top) * (mapImage.naturalHeight / mapImage.clientHeight));
+
+        // Send POST request
+        const response = await fetch(window.location.pathname, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ x, y })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log("Scan saved:", result);
+        } else {
+            console.error("Failed to send scan position.");
+        }
+    });
+    </script>
+</body>
+</html>
