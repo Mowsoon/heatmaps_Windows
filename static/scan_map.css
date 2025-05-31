@@ -1,0 +1,53 @@
+.map-actions {
+    background-color: var(--color-dark);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clickCoords {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-gold-dark);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#mapImage {
+    max-width: 50%;
+    width: 100%;
+    height: auto;
+    border: 2px solid var(--color-gold);
+    border-radius: 12px;
+    cursor: crosshair;
+}
+
+.btn-end {
+    background-color: var(--color-gold-dark);
+    color: var(--color-dark);
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1em;
+    text-decoration: none;
+    flex: 1;
+    text-align: center;
+    margin: 0 5px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.btn-end:hover {
+    background-color: var(--color-gold);
+    transform: translateY(-2px);
+}
