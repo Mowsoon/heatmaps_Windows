@@ -32,7 +32,7 @@ def send_data(map_name: str):
         headers={"Content-Disposition": f"attachment; filename={map_name}.json"}
     )
 
-def update_json_with_scan(map_name: str):
+def update_json_with_scan(map_name: str, x: int, y: int):
     file_path = DATA_DIR / f"{map_name}.json"
 
     if file_path.exists():
@@ -55,7 +55,9 @@ def update_json_with_scan(map_name: str):
 
         data[key].append({
             "bssid": bssid,
-            "signal": signal
+            "signal": signal,
+            "x": x,
+            "y": y
         })
 
     with open(file_path, "w", encoding="utf-8") as f:
@@ -63,7 +65,7 @@ def update_json_with_scan(map_name: str):
 
     return {"status": "success", "message": f"Scan data saved to {file_path.name}"}
 
-def empty_json(map_name: str):
+def delete_json(map_name: str):
     file_path = DATA_DIR / f"{map_name}.json"
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump({}, f, indent=4)
