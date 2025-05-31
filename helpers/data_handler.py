@@ -67,6 +67,8 @@ def update_json_with_scan(map_name: str, x: int, y: int):
 
 def delete_json(map_name: str):
     file_path = DATA_DIR / f"{map_name}.json"
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump({}, f, indent=4)
-    return {"status": "success", "message": f"{file_path.name} has been emptied"}
+    if file_path.exists():
+        file_path.unlink()
+        return {"status": "success", "message": f"{file_path.name} has been deleted"}
+    else:
+        return {"status": "error", "message": f"{file_path.name} does not exist"}
