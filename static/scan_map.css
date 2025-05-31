@@ -17,13 +17,12 @@
 .image-wrapper {
     position: relative;
     display: inline-block;
-    max-width: 100%;
+    max-width: 50%;
     margin: 0 auto;
     text-align: center;
 }
 
 #mapImage {
-    max-width: 50%;
     width: 100%;
     height: auto;
     border: 2px solid var(--color-gold);
@@ -50,4 +49,29 @@
 .btn-end:hover {
     background-color: var(--color-gold);
     transform: translateY(-2px);
+}
+
+.scan-progress {
+    width: 100%;
+    background-color: #ddd;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.scan-bar {
+    width: 0;
+    height: 100%;
+    background-color: var(--color-gold-dark);
+    animation: loadingBar 3s linear forwards;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes loadingBar {
+    from { width: 0%; }
+    to { width: 100%; }
 }
