@@ -53,41 +53,44 @@
   <script>
     const mapImage = document.getElementById('mapImage');
     const scanProgress = document.getElementById('scanProgress');
-
+    
     let isScanning = false;
-
+    
     mapImage.addEventListener('click', async (e) => {
         if (isScanning) return;
-
+    
         const rect = mapImage.getBoundingClientRect();
         const x = Math.round((e.clientX - rect.left) * (mapImage.naturalWidth / mapImage.clientWidth));
         const y = Math.round((e.clientY - rect.top) * (mapImage.naturalHeight / mapImage.clientHeight));
-
-
+    
         isScanning = true;
         scanProgress.classList.remove("hidden");
         scanProgress.innerHTML = '<div class="scan-bar"></div>';
-
-
-        try { const response = await fetch(window.location.pathname, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({x, y})
-        });
-        const data = await response.json();
-        console.log(data);
+    
+        const startTime = Date.now();
+    
+        try {
+            const response = await fetch(window.location.pathname, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({x, y})
+            });
+            const data = await response.json();
+            console.log(data);
         } catch (error) {
             console.error(error);
-
         } finally {
+            const elapsed = Date.now() - startTime;
+            const remaining = 3000 - elapsed;
             setTimeout(() => {
                 scanProgress.classList.add("hidden");
                 isScanning = false;
-            });
+            }, remaining > 0 ? remaining : 0);
         }
     });
     </script>
+    
 </body>
 </html>
