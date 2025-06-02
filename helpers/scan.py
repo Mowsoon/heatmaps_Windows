@@ -1,5 +1,6 @@
 import subprocess
 import re
+from time import sleep
 
 def get_wifi_interface():
     try:
