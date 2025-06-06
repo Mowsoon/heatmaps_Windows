@@ -21,12 +21,12 @@
           <p class="tagline">{{ translations.header.tagline }}</p>
       </div>
       <div class="language-selector">
-            {% if current_lang == 'fr' %}
-                <a href="/change_language/en?next=/scans/{{ map_name }}" class="lang-button lang-button-en">EN</a>
-            {% else %}
-                <a href="/change_language/fr?next=/scans/{{ map_name }}" class="lang-button lang-button-fr">FR</a>
-            {% endif %}
-            </div>
+        {% if current_lang == 'fr' %}
+            <a href="/change_language/en?next={{ ('/scans/' ~ map_name)|urlencode }}" class="lang-button lang-button-en">EN</a>
+        {% else %}
+            <a href="/change_language/fr?next={{ ('/scans/' ~ map_name)|urlencode }}" class="lang-button lang-button-fr">FR</a>
+        {% endif %}
+        </div>
   </header>
 
   <section class="map-actions">
