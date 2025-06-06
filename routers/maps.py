@@ -1,6 +1,8 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, status, HTTPException
 from config import template
 from helpers.html_handler import find_language, list_data
+from helpers.file_handler import find_map_url
+from helpers.data_handler import find_ssid_list
 
 router = APIRouter(
     prefix="/maps",
@@ -20,3 +22,21 @@ async def maps(request: Request):
             "maps": list_data()
         }
     )
+@router.get("/{map_name}")
+async def heatmaps(map_name: str, request: Request):
+    lang, translations  = find_language("heatmap", request)
+    map_url             = find_map_url(map_name)
+    ssid_band_list      = find_ssid_list(map_name)
+    if map_url:
+        if ssid_band_list:
+            return template.TemplateResponse("heatmap.html", {
+            "request": request,
+            "map_name": map_name,
+            "map_url": map_url,
+            "translations": translations,
+            "current_lang": lang,
+            "ssid_band_list": ssid_band_list
+        })
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Data not found")
+        
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Map not found")
