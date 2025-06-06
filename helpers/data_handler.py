@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse, FileResponse
 from pathlib import Path
 from config import DATA_DIR
 import json
-from helpers.scan import extract_ssid
+from helpers.scan_handler import extract_ssid
 
 
 
