@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, File, UploadFile, HTTPException
+from fastapi import APIRouter, Request, File, UploadFile, HTTPException, status
 from fastapi.responses import HTMLResponse, JSONResponse
 from config import template, ClickPosition
 from helpers.html_handler import generate_preview, find_language
@@ -43,7 +43,7 @@ async def load_scan(map_name: str, request: Request):
             "translations": translations,
             "current_lang": lang
         })
-    raise HTTPException(status_code=404, detail="Map not found")
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Map not found")
 
 
 @router.post("/{map_name}")
