@@ -72,3 +72,11 @@ def delete_json(map_name: str):
         return {"status": "success", "message": f"{file_path.name} has been deleted"}
     else:
         return {"status": "error", "message": f"{file_path.name} does not exist"}
+
+def find_ssid_list(map_name: str):
+    json_path = DATA_DIR / f"{map_name}.json"
+    if not json_path.exists():
+        return []
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return list(data.keys())
