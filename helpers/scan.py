@@ -23,7 +23,7 @@ def wifi_scan(interface):
         print("Error running 'iw'.")
         print("Please wait...")
         sleep(3)
-        return get_wifi_signals(interface)
+        return wifi_scan(interface)
 
     
 
