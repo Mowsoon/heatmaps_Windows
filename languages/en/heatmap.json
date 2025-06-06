@@ -1,0 +1,12 @@
+{
+    "header": {
+      "button": "← Go back",
+      "tagline": "Wi-Fi Network Analysis and Management"
+    },
+    "checklist": {
+      "title": "Choose the Heatmap you want to visualise"
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+}
