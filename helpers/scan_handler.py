@@ -149,8 +149,8 @@ def find_best_networks(networks):
     return list(ssid_seen.values())
 
 def extract_ssid_windows():
+    time.sleep(15)
     output = wifi_scan_netsh()
-    time.sleep(3)
     return parse_windows_scan_output(output)
 
 def extract_ssid_linux():
