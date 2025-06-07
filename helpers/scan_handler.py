@@ -1,5 +1,6 @@
 import subprocess
 import re
+import time
 from time import sleep
 import platform
 
@@ -149,6 +150,7 @@ def find_best_networks(networks):
 
 def extract_ssid_windows():
     output = wifi_scan_netsh()
+    time.sleep(3)
     return parse_windows_scan_output(output)
 
 def extract_ssid_linux():
