@@ -96,7 +96,7 @@ def parse_scan_output(scan_output):
 def parse_windows_scan_output(output):
     networks = []
     lines = output.splitlines()
-    ssid = bssid = rssi = band = None
+    ssid = bssid = rssi = None
     for line in lines:
         line = line.strip()
         match_ssid = re.match(r"^SSID \d+\s*:\s*(.+)$", line)
@@ -124,7 +124,7 @@ def parse_windows_scan_output(output):
                     "signal": rssi,
                     "band": band
                 })
-                bssid = rssi = band = None
+                bssid = rssi = None
 
     return networks
 
