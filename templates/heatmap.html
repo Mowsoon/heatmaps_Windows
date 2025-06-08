@@ -57,5 +57,30 @@
       <p>{{ translations.footer.copyright }}</p>
     </div>
   </footer>
-</body>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checklist = document.getElementById("heatmapChecklist");
+
+    checklist.addEventListener("change", async (e) => {
+      if (e.target.name === "heatmap") {
+        const selectedKey = encodeURIComponent(e.target.value);
+        const mapName = "{{ map_name }}";
+        const url = `${mapName}/data/${selectedKey}`;
+
+        try {
+          const response = await fetch(url);
+          if (!response.ok) throw new Error("Error charging data");
+
+          const data = await response.json();
+          console.log("Data received :", data);
+
+          // drawHeatmap(data);
+        } catch (err) {
+          console.error("Error charging the heatmap :", err);
+        }
+      }
+    });
+  });
+  </script>
+  </body>
 </html>
