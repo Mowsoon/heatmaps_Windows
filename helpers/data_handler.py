@@ -80,3 +80,14 @@ def find_ssid_list(map_name: str):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return list(data.keys())
+
+def find_data_list(map_name: str, ssid_band_key: str):
+    json_path = DATA_DIR / f"{map_name}.json"
+    if not json_path.exists():
+        return []
+    try:
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data.get(ssid_band_key, [])
+    except Exception as e:
+        return []
