@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/heatmapjs@2.0.5/heatmap.min.js"></script>
 </head>
 
 <body>
@@ -62,22 +63,22 @@
     const checklist = document.getElementById("heatmapChecklist");
 
     checklist.addEventListener("change", async (e) => {
-      if (e.target.name === "heatmap") {
-        const selectedKey = encodeURIComponent(e.target.value);
-        const mapName = "{{ map_name }}";
-        const url = `${mapName}/data/${selectedKey}`;
+      if (e.target.name !== "heatmap") return;
 
-        try {
-          const response = await fetch(url);
-          if (!response.ok) throw new Error("Error charging data");
+      const selectedKey = encodeURIComponent(e.target.value);
+      const mapName = "{{ map_name }}";
+      const url = `/maps/${encodeURIComponent(mapName)}/data/${selectedKey}`;
 
-          const data = await response.json();
-          console.log("Data received :", data);
-
-          // drawHeatmap(data);
-        } catch (err) {
-          console.error("Error charging the heatmap :", err);
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        if (result.url) {
+          document.getElementById("mapImage").src = result.url + "?t=" + new Date().getTime();
+        } else {
+          console.error("Erreur : ", result.error);
         }
+      } catch (err) {
+        console.error("Erreur chargement image heatmap :", err);
       }
     });
   });
