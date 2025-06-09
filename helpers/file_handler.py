@@ -52,3 +52,11 @@ def find_map_url(map_name: str):
         if map_file.exists():
             return f"/static/maps/{map_name}{ext}"
     return None
+
+def find_map(map_name: str):
+    for ext in [".png", ".jpg", ".jpeg"]:
+        filename = f"{map_name}{ext}"
+        map_file = MAPS_DIR / filename
+        if map_file.exists():
+            return map_file
+    return None
