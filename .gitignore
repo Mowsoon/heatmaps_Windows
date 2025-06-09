@@ -3,3 +3,4 @@ __pycache__
 static/maps/*
 static/font/*
 static/data/*
+static/generated/*
