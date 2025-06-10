@@ -50,5 +50,5 @@ async def display(map_name: str, ssid_band_key: str):
     data = find_data_list(map_name, ssid_band_key)
     map_info = find_map(map_name)
     if not map_info:
-        raise HTTPException(status_code=404, detail="Map not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Map not found")
     return draw_heatmap(data, map_info)
