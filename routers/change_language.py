@@ -4,8 +4,6 @@ from urllib.parse import urlparse
 
 router = APIRouter(prefix="/change_language")
 
-from urllib.parse import urlparse
-
 @router.get("/{lang}")
 async def change_language(lang: str, request: Request):
     if lang not in ['fr', 'en']:
