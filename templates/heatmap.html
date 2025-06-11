@@ -48,8 +48,11 @@
         </form>
       </div>
       <div class="map-display">
-        <img id="mapImage" src="{{ map_url }}" alt="{{ map_name }}">
-      </div>
+        <div class="map-wrapper">
+          <img id="mapImage" src="{{ map_url }}" alt="{{ map_name }}">
+          <div id="heatmapInfo" class="heatmap-info"></div>
+        </div>
+      </div>      
     </div>
   </section>
 
@@ -59,29 +62,61 @@
     </div>
   </footer>
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const checklist = document.getElementById("heatmapChecklist");
-
-    checklist.addEventListener("change", async (e) => {
-      if (e.target.name !== "heatmap") return;
-
-      const selectedKey = encodeURIComponent(e.target.value);
-      const mapName = "{{ map_name }}";
-      const url = `/maps/${encodeURIComponent(mapName)}/data/${selectedKey}`;
-
-      try {
-        const response = await fetch(url);
-        const result = await response.json();
-        if (result.url) {
-          document.getElementById("mapImage").src = result.url + "?t=" + new Date().getTime();
-        } else {
-          console.error("Erreur : ", result.error);
+    document.addEventListener("DOMContentLoaded", () => {
+      const checklist = document.getElementById("heatmapChecklist");
+      const img = document.getElementById("mapImage");
+      const infoBox = document.getElementById("heatmapInfo");
+      let circles = [];
+  
+      checklist.addEventListener("change", async (e) => {
+        if (e.target.name !== "heatmap") return;
+  
+        const selectedKey = encodeURIComponent(e.target.value);
+        const mapName = "{{ map_name }}";
+        const url = `/maps/${encodeURIComponent(mapName)}/data/${selectedKey}`;
+  
+        try {
+          const response = await fetch(url);
+          const result = await response.json();
+          if (result.url) {
+            img.src = result.url + "?t=" + new Date().getTime();
+            circles = result.points || [];
+  
+            img.onload = () => {
+              img.addEventListener("mousemove", (e) => {
+                const rect = img.getBoundingClientRect();
+                const scaleX = img.naturalWidth / rect.width;
+                const scaleY = img.naturalHeight / rect.height;
+  
+                const x = (e.clientX - rect.left) * scaleX;
+                const y = (e.clientY - rect.top) * scaleY;
+  
+                const radius = 30;
+                const point = circles.find(p => {
+                  const dx = p.x - x;
+                  const dy = p.y - y;
+                  return dx * dx + dy * dy < radius * radius;
+                });
+  
+                if (point) {
+                  infoBox.innerText = `Signal: ${point.signal} dBm\nBSSID: ${point.bssid}`;
+                } else {
+                  infoBox.innerText = "";
+                }
+              });
+  
+              img.addEventListener("mouseleave", () => {
+                infoBox.innerText = "";
+              });
+            };
+          } else {
+            console.error("Erreur : ", result.error);
+          }
+        } catch (err) {
+          console.error("Erreur chargement image heatmap :", err);
         }
-      } catch (err) {
-        console.error("Erreur chargement image heatmap :", err);
-      }
+      });
     });
-  });
-  </script>
+  </script>  
   </body>
 </html>

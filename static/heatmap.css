@@ -67,3 +67,28 @@
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
 }
+
+.map-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
+  .heatmap-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--color-gold-light);
+    background-color: var(--color-light-gray);
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: 400px;
+    height: 45px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px var(--color-dark);
+    overflow: hidden;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
