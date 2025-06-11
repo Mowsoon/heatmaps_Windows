@@ -46,7 +46,8 @@ def draw_heatmap(data, map_path: Path):
     output_path = GENERATED_DIR / output_filename
     cv2.imwrite(str(output_path), overlay)
 
-    return {"url": f"/static/generated/{output_filename}"}
+    return {"url": f"/static/generated/{output_filename}",
+            "points": data}
 
 def delete_heatmap():
     for file in GENERATED_DIR.iterdir():
