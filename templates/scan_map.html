@@ -62,7 +62,14 @@
         const rect = mapImage.getBoundingClientRect();
         const x = Math.round((e.clientX - rect.left) * (mapImage.naturalWidth / mapImage.clientWidth));
         const y = Math.round((e.clientY - rect.top) * (mapImage.naturalHeight / mapImage.clientHeight));
-    
+
+        const relX = e.clientX - rect.left;
+        const relY = e.clientY - rect.top;
+        const point = document.createElement('div');
+        point.classList.add('scan-point');
+        point.style.left = `${relX}px`;
+        point.style.top = `${relY}px`;
+        document.querySelector('.image-wrapper').appendChild(point);
         isScanning = true;
         scanProgress.classList.remove("hidden");
         scanProgress.innerHTML = '<div class="scan-bar"></div>';
