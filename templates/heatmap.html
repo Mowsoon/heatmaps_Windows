@@ -36,16 +36,19 @@
     <div class="map-container">
       <div class="checklist">
         <h2>{{ translations.checklist.title }}</h2>
-        <form id="heatmapChecklist">
-          {% for item in ssid_band_list %}
-          <div class="checkbox-item">
-              <label>
-                  <input type="radio" name="heatmap" value="{{ item }}">
-                  {{ item }}
-              </label>
-          </div>
-          {% endfor %}
-        </form>
+        <div class="checklist-scroll">
+          <form id="heatmapChecklist">
+            {% for item in ssid_band_list %}
+            <div class="checkbox-item">
+                <label>
+                    <input type="radio" name="heatmap" value="{{ item }}">
+                    {{ item }}
+                </label>
+            </div>
+            {% endfor %}
+          </form>
+        </div>
+        
       </div>
       <div class="map-display">
         <div class="map-wrapper">

@@ -16,7 +16,8 @@
     padding: 1rem;
     border-radius: 12px;
     box-shadow: var(--shadow-md);
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .checklist h2 {
@@ -24,6 +25,22 @@
     font-size: 1.2rem;
     color: var(--color-gold-light);
     text-align: center;
+}
+
+.checklist-scroll {
+    overflow-y: auto;
+    max-height: 700px; 
+    padding-right: 4px;
+}
+
+/* Pour un scroll stylé si tu veux (facultatif) */
+.checklist-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.checklist-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-gold);
+    border-radius: 8px;
 }
 
 #heatmapChecklist {
