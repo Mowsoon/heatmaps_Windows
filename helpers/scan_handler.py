@@ -59,11 +59,12 @@ def parse_scan_output(scan_output):
 
         if line.startswith("BSS "):
             if ssid and signal is not None and freq and bssid:
+                band = get_band(freq)
                 networks.append({
                     "ssid": ssid,
                     "bssid": bssid,
                     "signal": signal,
-                    "freq": freq
+                    "band": band
                 })
             match = re.match(r"BSS ([0-9a-fA-F:]+)", line)
             if match:
