@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/heatmapjs@2.0.5/heatmap.min.js"></script>
 </head>
 
 <body>
@@ -29,3 +28,85 @@
         {% endif %}
         </div>
     </header>
+
+    <section class="start">
+        <h1>{{ translations.start.title }}</h1>
+        <p>{{ translations.start.description }}</p>
+        <img src="/static/font/help.png" alt="Help Image">
+    </section>
+
+    <section class="plan">
+        <h2>{{ translations.plan.main_title }}</h2>
+        <div class="load-file">
+            <h3>{{ translations.plan.title_1 }}</h3>
+            <p>{{ translations.plan.description }}</p>
+            <img src="/static/font/load_plan.png" alt="Help Image">
+        </div>
+        <div class="delete-file">
+            <h3>{{ translations.plan.title_2 }}</h3>
+            <p>{{ translations.plan.description_2 }}</p>
+            <img src="/static/font/delete_plan.png" alt="Help Image">
+        </div>
+        <div class="interraction">
+            <h3>{{ translations.plan.title_3 }}</h3>
+            <p>{{ translations.plan.description_3 }}</p>
+            <img src="/static/font/interact_plan.png" alt="Help Image">
+        </div>
+    </section>
+
+    <section class="scans">
+        <h2>{{ translations.scans.main_title }}</h2>
+        <div class="scan-file">
+            <h3>{{ translations.scans.title_1 }}</h3>
+            <p>{{ translations.scans.description }}</p>
+            <img src="/static/font/scan.png" alt="Help Image">
+        </div>
+        <div class="scan">
+            <h3>{{ translations.scans.title_2 }}</h3>
+            <p>{{ translations.scans.description_2 }}</p>
+            <img src="/static/font/scan.png" alt="Help Image">
+        </div>
+        <div class="save-scan">
+            <h3>{{ translations.scans.title_2 }}</h3>
+            <p>{{ translations.scans.description_2 }}</p>
+            <img src="/static/font/save_scan.png" alt="Help Image">
+        </div>
+        <div class="load-scan">
+            <h3>{{ translations.scans.title_3 }}</h3>
+            <p>{{ translations.scans.description_3 }}</p>
+            <img src="/static/font/load_scan.png" alt="Help Image">
+        </div>
+        <div class="load-map-scan">
+            <h3>{{ translations.scans.title_4 }}</h3>
+            <p>{{ translations.scans.description_4 }}</p>
+            <img src="/static/font/load_map_scan.png" alt="Help Image">
+        </div>
+    </section>
+
+    <section class="maps">
+        <h2>{{ translations.maps.main_title }}</h2>
+        <div class="existing-maps">
+            <h3>{{ translations.maps.title_1 }}</h3>
+            <p>{{ translations.maps.description_1 }}</p>
+            <img src="/static/font/existing_maps.png" alt="Help Image">
+        </div>
+        <div class="visualise-map">
+            <h3>{{ translations.maps.title_2 }}</h3>
+            <p>{{ translations.maps.description_2 }}</p>
+            <img src="/static/font/visualise_map.png" alt="Help Image">
+        </div>
+        <div class="add-scan">
+            <h3>{{ translations.maps.title_2 }}</h3>
+            <p>{{ translations.maps.description_2 }}</p>
+            <img src="/static/font/add_scan.png" alt="Help Image">
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; {{ translations.footer.copyright }}</p>
+        </div>
+    </footer>
+</body>
+</html>
