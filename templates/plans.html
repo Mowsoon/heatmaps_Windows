@@ -55,6 +55,9 @@
                             <a href="/scans/{{ map.name }}" class="btn-scan">Scan</a>
                             <a href="/maps/{{ map.name }}" class="btn-visualise">{{ translations.existing_maps.Visualise }}</a>
                         </div>
+                        <div id="messages" 
+                            data-visualise-error="{{ translations.existing_maps.visualise_error }}"
+                            style="display: none;"></div>
                     </div>
                     {% endfor %}
                 </div>
@@ -95,6 +98,30 @@
                     console.error("Error:", error);
                     alert("An error occurred while deleting the map.");
                 }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+            const mapCards = document.querySelectorAll(".map-card");
+            const visualiseError = document.getElementById("messages").dataset.visualiseError;
+
+            mapCards.forEach(card => {
+                const mapName = card.dataset.mapName;
+                const visualiseBtn = card.querySelector(".btn-visualise");
+                const jsonUrl = `/static/data/${mapName}.json`; 
+
+                fetch(jsonUrl, { method: "HEAD" })
+                    .then(response => {
+                        if (!response.ok) {
+                            visualiseBtn.classList.add("disabled");
+                            visualiseBtn.addEventListener("click", (e) => {
+                                e.preventDefault();
+                                alert(visualiseError);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Erreur lors de la vérification du fichier JSON pour", mapName, error);
+                    });
             });
         });
     </script>

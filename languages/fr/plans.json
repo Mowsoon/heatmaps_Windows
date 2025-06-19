@@ -9,7 +9,8 @@
   },
   "existing_maps": {
     "title": "Plans existants",
-    "Visualise": "Visualiser"
+    "Visualise": "Visualiser",
+    "visualise_error": "Veuillez effectuer un scan avant de visualiser cette carte."
   },
   "footer": {
     "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."
