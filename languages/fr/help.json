@@ -1,0 +1,32 @@
+{
+    "header": {
+      "button": "← Revenir en arrière",
+      "tagline": "Analyse et gestion des réseaux Wi-Fi"
+    },
+    "start": {
+    "title": "Comment utiliser l'application",
+    "description": "Bienvenue dans l'application <strong>WiFi Heatmap</strong> !<br><br>Pour commencer, suivez ces étapes simples :<ul><li><strong>Charger un plan</strong> : ajoutez une image de votre plan (PNG, JPG, JPEG ou PDF).</li><li><strong>Scanner</strong> : effectuez un scan Wi-Fi en cliquant sur votre position actuelle sur le plan.</li><li><strong>Visualiser</strong> : consultez les résultats sur une carte thermique.</li></ul><div class=\"warning\">⚠️ Une fois une étape terminée, vous n'avez pas besoin de la refaire, sauf si vous souhaitez recommencer.</div>"
+    },
+    "plan": {
+        "main_title": "Comment intéragir avec les plans",
+        "title_1": "Comment charger un plan",
+        "description_1": "Vous pouvez charger un plan depuis <strong>deux pages différentes</strong> : celle des plans et celle des scans.<br>Dans les deux cas, cliquez sur le bouton correspondant.<div class=\"warning\">⚠️ Seuls les formats <em>PNG</em>, <em>JPG</em>, <em>JPEG</em> et <em>PDF</em> sont pris en charge.</div>",
+        "title_2": "Comment supprimer un plan",
+        "description_2": "La suppression d'un plan se fait uniquement depuis la page des plans.<br>Cliquez sur le bouton corbeille situé sur le plan que vous souhaitez supprimer.<br>Cette action supprimera également toutes les données de scan associées à ce plan."
+    },
+    "scans": {
+        "main_title": "Comment intéragir avec les scans",
+        "title_1": "Fonctionnalités de la page de scans",
+        "description_1": "La page de scan vous permet d'effectuer des scans sur le plan sélectionné.<div class=\"warning\">⚠️ Chaque nouveau scan efface les données du scan précédent.</div><br>Vous pouvez sauvegarder et charger différents scans pour comparer plusieurs analyses sur le même plan.<br>Le nom du fichier de scan peut être modifié librement.",
+        "title_2": "Comment scanner",
+        "description_2": "Pour démarrer un scan :<ul><li>Indiquez sur la carte la position actuelle de l'ordinateur.</li><li>Attendez la fin du scan (3 secondes sur Linux, 15 secondes sur Windows).</li><li>Ne bougez pas pendant le scan.</li></ul>Une barre de chargement s'affiche pendant la procédure et disparaît à la fin."
+    },
+    "maps": {
+        "main_title": "Comment intéragir avec les cartes",
+        "title_1": "Comment visualiser une carte",
+        "description_1": "Choisissez d'abord la carte désirée.<br>Ensuite, sélectionnez le réseau Wi-Fi que vous souhaitez visualiser.<br>En passant la souris sur un cercle, vous pouvez voir la puissance du signal ainsi que l'adresse MAC de la radio émettrice."
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."
+    }
+  }

@@ -1,0 +1,33 @@
+{
+    "header": {
+      "button": "← Go back",
+      "tagline": "Wi-Fi Network Analysis and Management"
+    },
+    "start": {
+      "title": "How to Use the Application",
+      "description": "Welcome to the <strong>WiFi Heatmap</strong> application!<br><br>To get started, follow these simple steps:<ul><li><strong>Upload a floor plan</strong>: Add an image of your floor plan (PNG, JPG, JPEG, or PDF).</li><li><strong>Scan</strong>: Perform a Wi-Fi scan by clicking on your current position on the map.</li><li><strong>Visualize</strong>: View the results on a heatmap.</li></ul><div class=\"warning\">⚠️ Once a step is completed, you don't need to repeat it unless you want to start over.</div>"
+    },
+    "plan": {
+      "main_title": "How to Interact with Floor Plans",
+      "title_1": "How to Upload a Floor Plan",
+      "description_1": "You can upload a plan from <strong>two different pages</strong>: the Plans page and the Scans page.<br>On both, click the corresponding button.<div class=\"warning\">⚠️ Only <em>PNG</em>, <em>JPG</em>, <em>JPEG</em>, and <em>PDF</em> formats are supported.</div>",
+      "title_2": "How to Delete a Floor Plan",
+      "description_2": "Floor plans can only be deleted from the Plans page.<br>Click the trash bin icon on the plan you want to delete.<br>This action will also delete all scan data associated with that plan."
+    },
+    "scans": {
+      "main_title": "How to Interact with Scans",
+      "title_1": "Features of the Scans Page",
+      "description_1": "The Scans page allows you to perform scans on the selected floor plan.<div class=\"warning\">⚠️ Each new scan deletes the previous scan data.</div><br>You can save and load different scans to compare multiple analyses on the same plan.<br>The scan file name can be freely edited.",
+      "title_2": "How to Perform a Scan",
+      "description_2": "To start a scan:<ul><li>Click your computer’s current position on the map.</li><li>Wait until the scan is complete (3 seconds on Linux, 15 seconds on Windows).</li><li>Do not move during the scan.</li></ul>A loading bar will appear during the process and disappear once it’s done."
+    },
+    "maps": {
+      "main_title": "How to Interact with Maps",
+      "title_1": "How to View a Map",
+      "description_1": "First, select the desired map.<br>Then, choose the Wi-Fi network you want to visualize.<br>By hovering over a circle, you can see the signal strength and the MAC address of the transmitting radio."
+    },
+    "footer": {
+      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    }
+  }
+  
