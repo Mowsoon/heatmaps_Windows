@@ -15,7 +15,8 @@ MAPS_ALLOWED_EXTENSIONS = [".png", ".jpg", ".jpeg", ".pdf"]
 MAPS_POSSIBLE_EXTENSIONS = [".png", ".jpg", ".jpeg"]
 
 MAPS_DIR = BASE_DIR / "static/maps"
-DATA_DIR = BASE_DIR / "static/data"
+SIGNAL_DIR = BASE_DIR / "static/data/signal"
+CHANNEL_DIR = BASE_DIR / "static/data/channel"
 LANG_DIR = BASE_DIR / "languages"
 GENERATED_DIR = BASE_DIR / "static/generated"
 GENERATED_DIR.mkdir(parents=True, exist_ok=True)

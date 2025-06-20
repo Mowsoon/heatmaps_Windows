@@ -1,5 +1,5 @@
 from fastapi import Request
-from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS, MAPS_POSSIBLE_EXTENSIONS, DATA_DIR, LANG_DIR
+from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS, MAPS_POSSIBLE_EXTENSIONS, SIGNAL_DIR, LANG_DIR
 import json
 
 def find_language(html_page_name: str,request: Request):
@@ -31,7 +31,7 @@ def generate_preview():
 
 def list_data():
     data = []
-    for file in DATA_DIR.iterdir():
+    for file in SIGNAL_DIR.iterdir():
         if file.suffix.lower() == ".json":
             for ext in MAPS_POSSIBLE_EXTENSIONS:
                 corresponding_map = MAPS_DIR / (file.stem + ext)

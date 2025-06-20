@@ -1,7 +1,7 @@
 from fastapi import File, UploadFile, status, HTTPException
 from fastapi.responses import RedirectResponse, FileResponse
 from pathlib import Path
-from config import DATA_DIR
+from config import SIGNAL_DIR
 import json
 from helpers.scan_handler import extract_ssid
 
@@ -13,7 +13,7 @@ def load_data(map_name: str, file: UploadFile = File(...)):
     if ext != ".json":
         return RedirectResponse(url="/scans", status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-    file_path = DATA_DIR / f"{map_name}.json"
+    file_path = SIGNAL_DIR / f"{map_name}.json"
     
     with open(file_path, "wb") as f:
         f.write(file.file.read())
@@ -22,7 +22,7 @@ def load_data(map_name: str, file: UploadFile = File(...)):
 
 
 def send_data(map_name: str):
-    file_path = DATA_DIR / f"{map_name}.json"
+    file_path = SIGNAL_DIR / f"{map_name}.json"
     if not file_path.exists():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
     return FileResponse(
@@ -33,7 +33,7 @@ def send_data(map_name: str):
     )
 
 def update_json_with_scan(map_name: str, x: int, y: int):
-    file_path = DATA_DIR / f"{map_name}.json"
+    file_path = SIGNAL_DIR / f"{map_name}.json"
 
     if file_path.exists():
         with open(file_path, "r", encoding="utf-8") as f:
@@ -66,7 +66,7 @@ def update_json_with_scan(map_name: str, x: int, y: int):
     return {"status": "success", "message": f"Scan data saved to {file_path.name}"}
 
 def delete_json(map_name: str):
-    file_path = DATA_DIR / f"{map_name}.json"
+    file_path = SIGNAL_DIR / f"{map_name}.json"
     if file_path.exists():
         file_path.unlink()
         return {"status": "success", "message": f"{file_path.name} has been deleted"}
@@ -74,7 +74,7 @@ def delete_json(map_name: str):
         return {"status": "error", "message": f"{file_path.name} does not exist"}
 
 def find_ssid_list(map_name: str):
-    json_path = DATA_DIR / f"{map_name}.json"
+    json_path = SIGNAL_DIR / f"{map_name}.json"
     if not json_path.exists():
         return []
     with open(json_path, "r", encoding="utf-8") as f:
@@ -82,7 +82,7 @@ def find_ssid_list(map_name: str):
     return list(data.keys())
 
 def find_data_list(map_name: str, ssid_band_key: str):
-    json_path = DATA_DIR / f"{map_name}.json"
+    json_path = SIGNAL_DIR / f"{map_name}.json"
     if not json_path.exists():
         return []
     try:
