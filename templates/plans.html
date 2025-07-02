@@ -107,7 +107,7 @@
             mapCards.forEach(card => {
                 const mapName = card.dataset.mapName;
                 const visualiseBtn = card.querySelector(".btn-visualise");
-                const jsonUrl = `/static/data/${mapName}.json`; 
+                const jsonUrl = `/static/data/signal/${mapName}.json`; 
 
                 fetch(jsonUrl, { method: "HEAD" })
                     .then(response => {
