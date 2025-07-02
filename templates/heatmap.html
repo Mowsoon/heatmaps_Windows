@@ -72,6 +72,8 @@
     const mapName = "{{ map_name }}";
     const ssidBandList = {{ ssid_band_list | tojson }};
     const channelList = {{ channel_list | tojson }};
+    ssidBandList.sort((a, b) => a.localeCompare(b));
+    channelList.sort((a, b) => a.localeCompare(b));
   </script>
   
 
@@ -110,6 +112,7 @@
         circles = [];
         img.onmousemove = null;
         img.onmouseleave = null;
+        img.src = map_url + "?t=" + new Date().getTime();
       });
 
       checklist.addEventListener("change", async (e) => {
