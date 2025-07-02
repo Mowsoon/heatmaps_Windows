@@ -3,6 +3,7 @@ import re
 import time
 from time import sleep
 import platform
+from collections import defaultdict
 
 def get_wifi_interface_linux():
     try:
@@ -149,27 +150,39 @@ def find_best_networks(networks):
             }
     return list(ssid_seen.values())
 
-def extract_ssid_windows():
+def count_wifi_channels_from_iw_output(output: str) -> dict[int, int]:
+    channel_counts = defaultdict(int)
+
+
+    blocks = output.split("BSS ") 
+    for block in blocks[1:]: 
+        match = re.search(r"DS Parameter set:\s+channel\s+(\d+)", block)
+        if match:
+            channel = int(match.group(1))
+            channel_counts[channel] += 1
+    return dict(channel_counts)
+
+def extract_windows():
     time.sleep(15)
     output = wifi_scan_netsh()
     return parse_windows_scan_output(output)
 
-def extract_ssid_linux():
+def extract_linux():
     interface = get_wifi_interface_linux()
     if not interface:
         print("No WiFi interface found.")
         return []
     output = wifi_scan_iw(interface)
-    return parse_scan_output(output)
+    channels = count_wifi_channels_from_iw_output(output)
+
+    return parse_scan_output(output), channels
 
 
-def extract_ssid():
+def extract_scan():
     os_actions = {
-        "Windows": extract_ssid_windows,
-        "Linux": extract_ssid_linux,
+        "Windows": extract_windows,
+        "Linux": extract_linux,
     }
-
     os = platform.system()
-    networks = os_actions.get(os, lambda: [])()
-    return find_best_networks(networks)
-
+    networks, channels = os_actions.get(os, lambda: [])()
+    return find_best_networks(networks), channels
