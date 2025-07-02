@@ -2,5 +2,6 @@
 __pycache__
 static/maps/*
 static/font/*
-static/data/*
+static/data/channel/*
+static/data/signal/*
 static/generated/*
