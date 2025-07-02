@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS
 from pathlib import Path
 from pdf2image import convert_from_bytes
+from helpers.data_handler import delete_json
 
 
 def load_file(page_path: str, file: UploadFile = File(...)):
@@ -42,6 +43,7 @@ def delete_file(map_name: str):
         map_file = MAPS_DIR / f"{map_name}{ext}"
         if map_file.exists():
             map_file.unlink()
+        delete_json(map_name)
 
     return JSONResponse(content={"status": "deleted"}, status_code=status.HTTP_200_OK)
 
