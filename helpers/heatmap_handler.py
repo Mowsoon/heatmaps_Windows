@@ -27,7 +27,7 @@ def channel_heatmap(data, map_path: Path):
     delete_heatmap()
     img = create_img(map_path)
 
-    overlay = generate_heatmap("count", 1, 20, data, img)
+    overlay = generate_heatmap("count", 0, 20, data, img)
 
     output_filename = f"{uuid.uuid4()}.jpg"
     output_path = GENERATED_DIR / output_filename
