@@ -36,6 +36,9 @@
     <div class="map-container">
       <div class="checklist">
         <h2>{{ translations.checklist.title }}</h2>
+        <div class="heatmap-mode-switch">
+          <button id="toggleModeBtn" type="button">🔁 Switch to Channel Mode</button>
+        </div>
         <div class="checklist-scroll">
           <form id="heatmapChecklist">
             {% for item in ssid_band_list %}
@@ -64,54 +67,86 @@
       <p>{{ translations.footer.copyright }}</p>
     </div>
   </footer>
+  
+  <script>
+    const mapName = "{{ map_name }}";
+    const ssidBandList = {{ ssid_band_list | tojson }};
+    const channelList = {{ channel_list | tojson }};
+  </script>
+  
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const checklist = document.getElementById("heatmapChecklist");
+      const toggleBtn = document.getElementById("toggleModeBtn");
       const img = document.getElementById("mapImage");
       const infoBox = document.getElementById("heatmapInfo");
       let circles = [];
-  
+      let currentMode = "signal";
+
+      function renderChecklist() {
+        checklist.innerHTML = "";
+        const list = currentMode === "signal" ? ssidBandList : channelList;
+        list.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "checkbox-item";
+          div.innerHTML = `
+            <label>
+              <input type="radio" name="heatmap" value="${item}">
+              ${item}
+            </label>
+          `;
+          checklist.appendChild(div);
+        });
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        currentMode = currentMode === "signal" ? "channel" : "signal";
+        toggleBtn.textContent = currentMode === "signal"
+          ? "🔁 Switch to Channel Mode"
+          : "🔁 Switch to Signal Mode";
+        renderChecklist();
+        infoBox.innerText = "";
+        circles = [];
+        img.onmousemove = null;
+        img.onmouseleave = null;
+      });
+
       checklist.addEventListener("change", async (e) => {
         if (e.target.name !== "heatmap") return;
-  
         const selectedKey = encodeURIComponent(e.target.value);
-        const mapName = "{{ map_name }}";
-        const url = `/maps/${encodeURIComponent(mapName)}/data/${selectedKey}`;
-  
+        const modePath = currentMode === "signal" ? "signal" : "channel";
+        const url = `/maps/${encodeURIComponent(mapName)}/${modePath}/${selectedKey}`;
+
         try {
           const response = await fetch(url);
           const result = await response.json();
           if (result.url) {
             img.src = result.url + "?t=" + new Date().getTime();
-            circles = result.points || [];
-  
-            img.onload = () => {
-              img.addEventListener("mousemove", (e) => {
+            circles = currentMode === "signal" ? result.points || [] : [];
+            if (currentMode === "signal") {
+              img.onmousemove = (e) => {
                 const rect = img.getBoundingClientRect();
                 const scaleX = img.naturalWidth / rect.width;
                 const scaleY = img.naturalHeight / rect.height;
-  
                 const x = (e.clientX - rect.left) * scaleX;
                 const y = (e.clientY - rect.top) * scaleY;
-  
                 const radius = 30;
                 const point = circles.find(p => {
                   const dx = p.x - x;
                   const dy = p.y - y;
                   return dx * dx + dy * dy < radius * radius;
                 });
-  
-                if (point) {
-                  infoBox.innerText = `Signal: ${point.signal} dBm\nBSSID: ${point.bssid}`;
-                } else {
-                  infoBox.innerText = "";
-                }
-              });
-  
-              img.addEventListener("mouseleave", () => {
-                infoBox.innerText = "";
-              });
-            };
+                infoBox.innerText = point
+                  ? `Signal: ${point.signal} dBm\nBSSID: ${point.bssid}`
+                  : "";
+              };
+              img.onmouseleave = () => infoBox.innerText = "";
+            } else {
+              img.onmousemove = null;
+              img.onmouseleave = null;
+              infoBox.innerText = "";
+            }
           } else {
             console.error("Erreur : ", result.error);
           }
@@ -119,7 +154,8 @@
           console.error("Erreur chargement image heatmap :", err);
         }
       });
+      renderChecklist();
     });
-  </script>  
+  </script>
   </body>
 </html>

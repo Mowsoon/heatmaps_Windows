@@ -71,13 +71,23 @@ def extract_channel(channels: dict[int, int], x: int, y: int, map_name: str):
     else:
         data = {}
 
-    key = f"{x},{y}"
+    for channel, count in channels.items():
+        key = f"Channel_{channel}"
+        if key not in data:
+            data[key] = []
 
-    data[key] = {f"channel{chan}": count for chan, count in channels.items()}
+        data[key].append({
+            "x": x,
+            "y": y,
+            "count": count
+        }) 
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
-    return f"Scan data saved to {file_path.name}"
+
+    return f"Channel data saved to {file_path.name}"
+
+    
 
 def update_json_with_scan(map_name: str, x: int, y: int):
     results, channels   = extract_scan()
@@ -117,13 +127,25 @@ def find_ssid_list(map_name: str):
         data = json.load(f)
     return list(data.keys())
 
-def find_data_list(map_name: str, ssid_band_key: str):
-    json_path = SIGNAL_DIR / f"{map_name}.json"
+def find_channel_list(map_name: str):
+    json_path = CHANNEL_DIR / f"{map_name}.json"
+    if not json_path.exists():
+        return []
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return list(data.keys())
+
+def find_data_list(map_name: str, key: str, type: str):
+    if(type == "channel"):
+        json_path = CHANNEL_DIR / f"{map_name}.json"
+    else:
+        json_path = SIGNAL_DIR / f"{map_name}.json"
+
     if not json_path.exists():
         return []
     try:
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-        return data.get(ssid_band_key, [])
+        return data.get(key, [])
     except Exception as e:
         return []

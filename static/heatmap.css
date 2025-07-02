@@ -29,11 +29,10 @@
 
 .checklist-scroll {
     overflow-y: auto;
-    max-height: 700px; 
+    max-height: 480px; 
     padding-right: 4px;
 }
 
-/* Pour un scroll stylé si tu veux (facultatif) */
 .checklist-scroll::-webkit-scrollbar {
     width: 8px;
 }
@@ -109,3 +108,18 @@
     transition: opacity 0.2s ease-in-out;
   }
   
+
+  .heatmap-mode-switch{
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  #toggleModeBtn {
+    background-color: var(--color-black);
+    color: var(--color-gold);
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+  }
