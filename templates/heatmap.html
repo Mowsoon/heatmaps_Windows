@@ -37,7 +37,7 @@
       <div class="checklist">
         <h2>{{ translations.checklist.title }}</h2>
         <div class="heatmap-mode-switch">
-          <button id="toggleModeBtn" type="button">🔁 Switch to Channel Mode</button>
+          <button id="toggleModeBtn" type="button">{{ translations.checklist.switch_to_channel }}</button>
         </div>
         <div class="checklist-scroll">
           <form id="heatmapChecklist">
@@ -72,6 +72,10 @@
     const mapName = "{{ map_name }}";
     const ssidBandList = {{ ssid_band_list | tojson }};
     const channelList = {{ channel_list | tojson }};
+    const translations = {
+      switchToChannel: "{{ translations.checklist.switch_to_channel }}",
+      switchToSignal: "{{ translations.checklist.switch_to_signal }}"
+    };
     ssidBandList.sort((a, b) => a.localeCompare(b));
     channelList.sort((a, b) => a.localeCompare(b));
   </script>
@@ -105,13 +109,9 @@
       toggleBtn.addEventListener("click", () => {
         currentMode = currentMode === "signal" ? "channel" : "signal";
         toggleBtn.textContent = currentMode === "signal"
-          ? "🔁 Switch to Channel Mode"
-          : "🔁 Switch to Signal Mode";
+          ? translations.switchToChannel
+          : translations.switchToSignal;
         renderChecklist();
-        infoBox.innerText = "";
-        circles = [];
-        img.onmousemove = null;
-        img.onmouseleave = null;
         img.src = map_url + "?t=" + new Date().getTime();
       });
 
@@ -126,8 +126,8 @@
           const result = await response.json();
           if (result.url) {
             img.src = result.url + "?t=" + new Date().getTime();
-            circles = currentMode === "signal" ? result.points || [] : [];
-            if (currentMode === "signal") {
+            circles = result.points || [];
+            if (currentMode === "signal" || currentMode === "channel") {
               img.onmousemove = (e) => {
                 const rect = img.getBoundingClientRect();
                 const scaleX = img.naturalWidth / rect.width;
@@ -140,9 +140,16 @@
                   const dy = p.y - y;
                   return dx * dx + dy * dy < radius * radius;
                 });
-                infoBox.innerText = point
-                  ? `Signal: ${point.signal} dBm\nBSSID: ${point.bssid}`
-                  : "";
+
+                if (point) {
+                  if (currentMode === "signal") {
+                    infoBox.innerText = `Signal: ${point.signal} dBm\nBSSID: ${point.bssid}`;
+                  } else if (currentMode === "channel") {
+                    infoBox.innerText = `Count: ${point.count}`;
+                  }
+                } else {
+                  infoBox.innerText = "";
+                }
               };
               img.onmouseleave = () => infoBox.innerText = "";
             } else {
@@ -150,6 +157,7 @@
               img.onmouseleave = null;
               infoBox.innerText = "";
             }
+
           } else {
             console.error("Erreur : ", result.error);
           }

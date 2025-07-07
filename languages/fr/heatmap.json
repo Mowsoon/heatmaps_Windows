@@ -4,7 +4,9 @@
       "tagline": "Analyse et gestion des réseaux Wi-Fi"
     },
     "checklist": {
-      "title": "Choisissez la Heatmap que vous souhaitez visualiser"
+      "title": "Choisissez la Heatmap que vous souhaitez visualiser",
+      "switch_to_channel": "🔁 Passer en mode Canal",
+      "switch_to_signal": "🔁 Revenir en mode Signal"
     },
     "footer": {
       "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."

@@ -4,7 +4,9 @@
       "tagline": "Wi-Fi Network Analysis and Management"
     },
     "checklist": {
-      "title": "Choose the Heatmap you want to visualise"
+      "title": "Choose the Heatmap you want to visualise",
+      "switch_to_channel": "🔁 Switch to Channel",
+      "switch_to_signal": "🔁 Switch to Signal"
     },
     "footer": {
       "copyright": "© 2025 WiFi Heatmap. All rights reserved."
