@@ -4,8 +4,10 @@ import time
 from time import sleep
 import platform
 from collections import defaultdict
+from typing import Any
 
-def get_wifi_interface_linux():
+
+def get_wifi_interface_linux() -> str | None:
     try:
         output = subprocess.check_output(["iw", "dev"], encoding="utf-8")
         for line in output.splitlines():
@@ -14,7 +16,8 @@ def get_wifi_interface_linux():
     except subprocess.CalledProcessError:
         return None
 
-def wifi_scan_iw(interface):
+
+def wifi_scan_iw(interface: str) -> str:
     try:
         output = subprocess.check_output(
             ["sudo", "/sbin/iw", "dev", interface, "scan"],
@@ -28,7 +31,8 @@ def wifi_scan_iw(interface):
         sleep(3)
         return wifi_scan_iw(interface)
 
-def wifi_scan_netsh():
+
+def wifi_scan_netsh() -> str:
     try:
         output = subprocess.check_output(
             ["netsh", "wlan", "show", "networks", "mode=bssid"],
@@ -41,7 +45,8 @@ def wifi_scan_netsh():
         print("Error running 'netsh'.")
         return ""
 
-def get_band(freq):
+
+def get_band(freq) -> str:
     if 2400 <= freq <= 2485:
         return "2.4GHz"
     elif 5150 <= freq <= 5825:
@@ -51,10 +56,11 @@ def get_band(freq):
     else:
         return "Unknown"
 
-def parse_scan_output(scan_output):
+
+def parse_scan_output(scan_output: str) -> list[dict[str, str | float]]:
     networks = []
     bssid = ssid = freq = signal = None
-    
+
     for line in scan_output.splitlines():
         line = line.strip()
 
@@ -70,7 +76,7 @@ def parse_scan_output(scan_output):
             match = re.match(r"BSS ([0-9a-fA-F:]+)", line)
             if match:
                 bssid = match.group(1)
-                ssid = signal = freq = None  
+                ssid = signal = freq = None
 
         elif line.startswith("SSID:"):
             ssid = line[5:].strip() or "<Unknown>"
@@ -96,7 +102,8 @@ def parse_scan_output(scan_output):
 
     return networks
 
-def parse_windows_scan_output(output):
+
+def parse_windows_scan_output(output: str) -> list[dict[str, str | float]]:
     networks = []
     lines = output.splitlines()
     ssid = bssid = rssi = None
@@ -132,7 +139,8 @@ def parse_windows_scan_output(output):
     return networks
 
 
-def find_best_networks(networks):
+
+def find_best_networks(networks: list[dict[str, str | float]]) -> list[dict[str, str | float]]:
     ssid_seen = {}
     for net in networks:
         ssid = net["ssid"]
@@ -164,26 +172,28 @@ def count_wifi_channels_from_netsh_output(output: str) -> dict[int, int]:
             channel_counts[channel] += 1
     return dict(channel_counts)
 
+
 def count_wifi_channels_from_iw_output(output: str) -> dict[int, int]:
     channel_counts = defaultdict(int)
 
-
-    blocks = output.split("BSS ") 
-    for block in blocks[1:]: 
+    blocks = output.split("BSS ")
+    for block in blocks[1:]:
         match = re.search(r"DS Parameter set:\s+channel\s+(\d+)", block)
         if match:
             channel = int(match.group(1))
             channel_counts[channel] += 1
     return dict(channel_counts)
 
-def extract_windows():
+
+def extract_windows() -> tuple[list[dict[str, str | float]], dict[int, int]]:
     time.sleep(15)
     output = wifi_scan_netsh()
     channels = count_wifi_channels_from_netsh_output(output)
 
     return parse_windows_scan_output(output), channels
 
-def extract_linux():
+
+def extract_linux() -> list[Any] | tuple[list[dict[str, str | float]], dict[int, int]]:
     interface = get_wifi_interface_linux()
     if not interface:
         print("No WiFi interface found.")
@@ -194,7 +204,7 @@ def extract_linux():
     return parse_scan_output(output), channels
 
 
-def extract_scan():
+def extract_scan() -> tuple[list[dict[str, str | float]], dict[int, int]]:
     os_actions = {
         "Windows": extract_windows,
         "Linux": extract_linux,

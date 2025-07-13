@@ -1,3 +1,4 @@
+from typing import Any, Dict, List
 from fastapi import File, UploadFile, status, HTTPException
 from fastapi.responses import RedirectResponse, FileResponse
 from pathlib import Path
@@ -6,22 +7,21 @@ import json
 from helpers.scan_handler import extract_scan
 
 
-
-def load_data(map_name: str, file: UploadFile = File(...)):
+def load_data(map_name: str, file: UploadFile = File(...)) -> RedirectResponse:
     ext = Path(file.filename).suffix.lower()
 
     if ext != ".json":
         return RedirectResponse(url="/scans", status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
     file_path = SIGNAL_DIR / f"{map_name}.json"
-    
+
     with open(file_path, "wb") as f:
         f.write(file.file.read())
 
     return RedirectResponse(url="/scans", status_code=status.HTTP_303_SEE_OTHER)
 
 
-def send_data(map_name: str):
+def send_data(map_name: str) -> FileResponse:
     file_path = SIGNAL_DIR / f"{map_name}.json"
     if not file_path.exists():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
@@ -32,7 +32,8 @@ def send_data(map_name: str):
         headers={"Content-Disposition": f"attachment; filename={map_name}.json"}
     )
 
-def extract_signal(results, x, y, map_name):
+
+def extract_signal(results: List[Dict[str, str | float]], x: int, y: int, map_name: str) -> str:
     file_path = SIGNAL_DIR / f"{map_name}.json"
 
     if file_path.exists():
@@ -42,27 +43,28 @@ def extract_signal(results, x, y, map_name):
         data = {}
 
     for network in results:
-        ssid    = network["ssid"]
-        band    = network["band"]
-        bssid   = network["bssid"]
-        signal  = network["signal"]
-    
+        ssid = network["ssid"]
+        band = network["band"]
+        bssid = network["bssid"]
+        signal = network["signal"]
+
         key = f"{ssid} [{band}]"
         if key not in data:
             data[key] = []
-    
+
         data[key].append({
             "bssid": bssid,
             "signal": signal,
             "x": x,
             "y": y
         })
-    
+
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
     return f"Scan data saved to {file_path.name}"
 
-def extract_channel(channels: dict[int, int], x: int, y: int, map_name: str):
+
+def extract_channel(channels: Dict[int, int], x: int, y: int, map_name: str) -> str:
     file_path = CHANNEL_DIR / f"{map_name}.json"
 
     if file_path.exists():
@@ -80,25 +82,23 @@ def extract_channel(channels: dict[int, int], x: int, y: int, map_name: str):
             "x": x,
             "y": y,
             "count": count
-        }) 
+        })
 
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
     return f"Channel data saved to {file_path.name}"
 
-    
 
-def update_json_with_scan(map_name: str, x: int, y: int):
-    results, channels   = extract_scan()
-    signal_mess         = extract_signal(results, x, y, map_name)
-    channel_mess        = extract_channel(channels, x, y, map_name)
+def update_json_with_scan(map_name: str, x: int, y: int) -> Dict[str, str]:
+    results, channels = extract_scan()
+    signal_mess = extract_signal(results, x, y, map_name)
+    channel_mess = extract_channel(channels, x, y, map_name)
 
     return {"status": "success", "message": signal_mess + "\n" + channel_mess}
 
 
-
-def delete_signal(map_name: str):
+def delete_signal(map_name: str) -> str:
     file_path = SIGNAL_DIR / f"{map_name}.json"
     if file_path.exists():
         file_path.unlink()
@@ -106,7 +106,8 @@ def delete_signal(map_name: str):
     else:
         return f"{file_path.name} does not exist"
 
-def delete_channel(map_name: str):
+
+def delete_channel(map_name: str) -> str:
     file_path = CHANNEL_DIR / f"{map_name}.json"
     if file_path.exists():
         file_path.unlink()
@@ -114,12 +115,14 @@ def delete_channel(map_name: str):
     else:
         return f"{file_path.name} does not exist"
 
-def delete_json(map_name: str):
-    signal_mess     = delete_signal(map_name)
-    channel_mess    = delete_channel(map_name)
+
+def delete_json(map_name: str) -> Dict[str, str]:
+    signal_mess = delete_signal(map_name)
+    channel_mess = delete_channel(map_name)
     return {"status": "deleted", "message": signal_mess + "\n" + channel_mess}
 
-def find_ssid_list(map_name: str):
+
+def find_ssid_list(map_name: str) -> List[str]:
     json_path = SIGNAL_DIR / f"{map_name}.json"
     if not json_path.exists():
         return []
@@ -127,7 +130,8 @@ def find_ssid_list(map_name: str):
         data = json.load(f)
     return list(data.keys())
 
-def find_channel_list(map_name: str):
+
+def find_channel_list(map_name: str) -> List[str]:
     json_path = CHANNEL_DIR / f"{map_name}.json"
     if not json_path.exists():
         return []
@@ -135,8 +139,9 @@ def find_channel_list(map_name: str):
         data = json.load(f)
     return list(data.keys())
 
-def find_data_list(map_name: str, key: str, type: str):
-    if(type == "channel"):
+
+def find_data_list(map_name: str, key: str, type: str) -> List[Dict[str, Any]]:
+    if (type == "channel"):
         json_path = CHANNEL_DIR / f"{map_name}.json"
     else:
         json_path = SIGNAL_DIR / f"{map_name}.json"

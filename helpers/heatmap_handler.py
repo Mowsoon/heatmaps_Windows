@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import matplotlib.cm as cm
 import uuid
 import shutil
 import tempfile

@@ -1,13 +1,14 @@
+from typing import Dict, List, Tuple
 from fastapi import Request
 from config import MAPS_DIR, MAPS_ALLOWED_EXTENSIONS, MAPS_POSSIBLE_EXTENSIONS, SIGNAL_DIR, LANG_DIR
 import json
 
-def find_language(html_page_name: str,request: Request):
+
+def find_language(html_page_name: str, request: Request) -> Tuple[str, Dict]:
     language = request.cookies.get('lang', 'en')
     if language not in ["en", "fr"]:
         language = "en"
     language_path = LANG_DIR / language / f"{html_page_name}.json"
-
 
     if not language_path.exists():
         language_path = LANG_DIR / "en" / f"{html_page_name}.json"
@@ -18,8 +19,7 @@ def find_language(html_page_name: str,request: Request):
     return language, translation
 
 
-
-def generate_preview():
+def generate_preview() -> List[Dict[str, str]]:
     maps = []
     for file in MAPS_DIR.iterdir():
         if file.suffix.lower() in MAPS_POSSIBLE_EXTENSIONS:
@@ -29,7 +29,8 @@ def generate_preview():
             })
     return maps
 
-def list_data():
+
+def list_data() -> List[Dict[str, str]]:
     data = []
     for file in SIGNAL_DIR.iterdir():
         if file.suffix.lower() == ".json":
@@ -37,5 +38,5 @@ def list_data():
                 corresponding_map = MAPS_DIR / (file.stem + ext)
                 if corresponding_map.exists():
                     data.append({"name": file.stem})
-                    break 
+                    break
     return data
