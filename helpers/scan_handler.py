@@ -150,6 +150,20 @@ def find_best_networks(networks):
             }
     return list(ssid_seen.values())
 
+
+def count_wifi_channels_from_netsh_output(output: str) -> dict[int, int]:
+    channel_counts = defaultdict(int)
+
+    lines = output.splitlines()
+
+    for line in lines:
+        line = line.strip()
+        match = re.match(r"Canal\s*:\s*(\d+)", line)
+        if match:
+            channel = int(match.group(1))
+            channel_counts[channel] += 1
+    return dict(channel_counts)
+
 def count_wifi_channels_from_iw_output(output: str) -> dict[int, int]:
     channel_counts = defaultdict(int)
 
@@ -165,7 +179,9 @@ def count_wifi_channels_from_iw_output(output: str) -> dict[int, int]:
 def extract_windows():
     time.sleep(15)
     output = wifi_scan_netsh()
-    return parse_windows_scan_output(output)
+    channels = count_wifi_channels_from_netsh_output(output)
+
+    return parse_windows_scan_output(output), channels
 
 def extract_linux():
     interface = get_wifi_interface_linux()
