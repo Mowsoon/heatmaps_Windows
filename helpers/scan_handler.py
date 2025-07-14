@@ -202,5 +202,5 @@ def extract_scan() -> tuple[list[dict[str, str | float]], dict[int, int]]:
         "Windows": extract_windows,
         "Linux": extract_linux,
     }
-    networks, channels = os_actions.get(SYS, lambda: [])()
+    networks, channels = os_actions.get(SYS, lambda: ([], {}))()
     return find_best_networks(networks), channels
