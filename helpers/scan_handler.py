@@ -2,34 +2,28 @@ import subprocess
 import re
 import time
 from time import sleep
-import platform
 from collections import defaultdict
-from typing import Any
+from config import SYS, WIFI_INTERFACE
+import pywifi
 
-
-def get_wifi_interface_linux() -> str | None:
-    try:
-        output = subprocess.check_output(["iw", "dev"], encoding="utf-8")
-        for line in output.splitlines():
-            if line.strip().startswith("Interface"):
-                return line.split()[1]
-    except subprocess.CalledProcessError:
-        return None
 
 
 def wifi_scan_iw(interface: str) -> str:
-    try:
-        output = subprocess.check_output(
-            ["sudo", "/sbin/iw", "dev", interface, "scan"],
-            stderr=subprocess.DEVNULL,
-            universal_newlines=True
-        )
-        return output
-    except subprocess.CalledProcessError:
-        print("Error running 'iw'.")
-        print("Please wait...")
-        sleep(3)
-        return wifi_scan_iw(interface)
+    retries = 3
+    while retries > 0:
+        try:
+            output = subprocess.check_output(
+                ["sudo", "/sbin/iw", "dev", interface, "scan"],
+                stderr=subprocess.DEVNULL,
+                universal_newlines=True
+            )
+            return output
+        except subprocess.CalledProcessError:
+            print("Error running 'iw'.")
+            print("Please wait...")
+            sleep(3)
+            retries -= 1
+    raise RuntimeError("Failed to run 'iw' scan after multiple attempts.")
 
 
 def wifi_scan_netsh() -> str:
@@ -186,19 +180,18 @@ def count_wifi_channels_from_iw_output(output: str) -> dict[int, int]:
 
 
 def extract_windows() -> tuple[list[dict[str, str | float]], dict[int, int]]:
-    time.sleep(15)
+    if not WIFI_INTERFACE:
+        return [], {}
+    WIFI_INTERFACE.scan()
+    time.sleep(3)
     output = wifi_scan_netsh()
     channels = count_wifi_channels_from_netsh_output(output)
 
     return parse_windows_scan_output(output), channels
 
 
-def extract_linux() -> list[Any] | tuple[list[dict[str, str | float]], dict[int, int]]:
-    interface = get_wifi_interface_linux()
-    if not interface:
-        print("No WiFi interface found.")
-        return []
-    output = wifi_scan_iw(interface)
+def extract_linux() -> tuple[list[dict[str, str | float]], dict[int, int]]:
+    output = wifi_scan_iw(WIFI_INTERFACE)
     channels = count_wifi_channels_from_iw_output(output)
 
     return parse_scan_output(output), channels
@@ -209,6 +202,5 @@ def extract_scan() -> tuple[list[dict[str, str | float]], dict[int, int]]:
         "Windows": extract_windows,
         "Linux": extract_linux,
     }
-    os = platform.system()
-    networks, channels = os_actions.get(os, lambda: [])()
+    networks, channels = os_actions.get(SYS, lambda: [])()
     return find_best_networks(networks), channels
