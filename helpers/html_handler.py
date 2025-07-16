@@ -30,7 +30,7 @@ def generate_preview() -> List[Dict[str, str]]:
     return maps
 
 
-def list_data() -> List[Dict[str, str]]:
+def list_map() -> List[Dict[str, str]]:
     data = []
     for file in SIGNAL_DIR.iterdir():
         if file.suffix.lower() == ".json":
