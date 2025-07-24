@@ -18,10 +18,15 @@ MAPS_POSSIBLE_EXTENSIONS = [".png", ".jpg", ".jpeg"]
 
 MAPS_DIR = BASE_DIR / "static/maps"
 SIGNAL_DIR = BASE_DIR / "static/data/signal"
+DATA_DIR = BASE_DIR / "static/data"
 CHANNEL_DIR = BASE_DIR / "static/data/channel"
 LANG_DIR = BASE_DIR / "languages"
 GENERATED_DIR = BASE_DIR / "static/generated"
 GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+for path in [MAPS_DIR, SIGNAL_DIR, CHANNEL_DIR]:
+    path.mkdir(parents=True, exist_ok=True)
 
 class ClickPosition(BaseModel):
     x: int
@@ -43,4 +48,4 @@ if sys.platform.startswith("win"):
 
 elif sys.platform.startswith("linux"):
     SYS = "Linux"
-    WIFI_INTERFACE = get_wifi_interface_linux
+    WIFI_INTERFACE = get_wifi_interface_linux()
