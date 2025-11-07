@@ -5,3 +5,4 @@ static/font/*
 static/data/channel/*
 static/data/signal/*
 static/generated/*
+build/

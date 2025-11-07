@@ -31,7 +31,7 @@ async def heatmaps(map_name: str, request: Request):
     ssid_band_list      = find_ssid_list(map_name)
     channel_list        = find_channel_list(map_name)
     if map_url:
-        if ssid_band_list:
+        if ssid_band_list or channel_list:
             return template.TemplateResponse("heatmap.html", {
             "request": request,
             "map_name": map_name,
@@ -41,7 +41,7 @@ async def heatmaps(map_name: str, request: Request):
             "ssid_band_list": ssid_band_list,
             "channel_list": channel_list
         })
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Data not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Scan data not found")
         
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Map not found")
 

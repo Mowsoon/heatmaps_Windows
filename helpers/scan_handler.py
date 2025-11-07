@@ -118,7 +118,7 @@ def parse_windows_scan_output(output: str) -> list[dict[str, str | float]]:
             rssi = (signal_percent / 2) - 100
             continue
 
-        match_band = re.match(r"^Bande\s*:\s*(.+)$", line)
+        match_band = re.match(r"^(?:Band|Bande)\s*:\s*(.+)$", line)
         if match_band:
             band = match_band.group(1).replace("\u00a0", " ").strip()  # clean non-breaking spaces
             if ssid and bssid and rssi is not None and band:
@@ -160,7 +160,7 @@ def count_wifi_channels_from_netsh_output(output: str) -> dict[int, int]:
 
     for line in lines:
         line = line.strip()
-        match = re.match(r"Canal\s*:\s*(\d+)", line)
+        match = re.match(r"^(?:Channel|Canal)\s*:\s*(\d+)", line)
         if match:
             channel = int(match.group(1))
             channel_counts[channel] += 1
