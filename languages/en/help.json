@@ -49,6 +49,6 @@
     "description_2": "This application runs on:<br><ul><li><strong>Windows</strong> 10 and 11.</li><li><strong>Linux</strong> (tested on Ubuntu, requires 'iw tools').</li></ul>"
   },
   "footer": {
-    "copyright": "© 2025 WiFi Heatmap. All rights reserved."
+    "copyright": "Released under the MIT License."
   }
 }
