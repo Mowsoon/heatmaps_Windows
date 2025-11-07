@@ -1,33 +1,54 @@
 {
-    "header": {
-      "button": "← Go back",
-      "tagline": "Wi-Fi Network Analysis and Management"
-    },
-    "start": {
-      "title": "How to Use the Application",
-      "description": "Welcome to the <strong>WiFi Heatmap</strong> application!<br><br>To get started, follow these simple steps:<ul><li><strong>Upload a floor plan</strong>: Add an image of your floor plan (PNG, JPG, JPEG, or PDF).</li><li><strong>Scan</strong>: Perform a Wi-Fi scan by clicking on your current position on the map.</li><li><strong>Visualize</strong>: View the results on a heatmap.</li></ul><div class=\"warning\">⚠️ Once a step is completed, you don't need to repeat it unless you want to start over.</div>"
-    },
-    "plan": {
-      "main_title": "How to Interact with Floor Plans",
-      "title_1": "How to Upload a Floor Plan",
-      "description_1": "You can upload a plan from <strong>two different pages</strong>: the Plans page and the Scans page.<br>On both, click the corresponding button.<div class=\"warning\">⚠️ Only <em>PNG</em>, <em>JPG</em>, <em>JPEG</em>, and <em>PDF</em> formats are supported.</div>",
-      "title_2": "How to Delete a Floor Plan",
-      "description_2": "Floor plans can only be deleted from the Plans page.<br>Click the trash bin icon on the plan you want to delete.<br>This action will also delete all scan data associated with that plan."
-    },
-    "scans": {
-      "main_title": "How to Interact with Scans",
-      "title_1": "Features of the Scans Page",
-      "description_1": "The Scans page allows you to perform scans on the selected floor plan.<div class=\"warning\">⚠️ Each new scan deletes the previous scan data.</div><br>You can save and load different scans to compare multiple analyses on the same plan.<br>The scan file name can be freely edited.",
-      "title_2": "How to Perform a Scan",
-      "description_2": "To start a scan:<ul><li>Click your computer’s current position on the map.</li><li>Wait until the scan is complete (3 seconds on Linux, 15 seconds on Windows).</li><li>Do not move during the scan.</li></ul>A loading bar will appear during the process and disappear once it’s done."
-    },
-    "maps": {
-      "main_title": "How to Interact with Maps",
-      "title_1": "How to View a Map",
-      "description_1": "First, select the desired map.<br>Then, choose the Wi-Fi network you want to visualize.<br>By hovering over a circle, you can see the signal strength and the MAC address of the transmitting radio."
-    },
-    "footer": {
-      "copyright": "© 2025 WiFi Heatmap. All rights reserved."
-    }
+  "header": {
+    "button": "← Go back",
+    "tagline": "Wi-Fi Network Analysis and Management"
+  },
+  "nav": {
+    "tutorial": "Tutorial (Getting Started)",
+    "how_to": "How-To Guides",
+    "explanation": "Explanations",
+    "reference": "Reference"
+  },
+  "tutorial": {
+    "main_title": "Tutorial: Create Your First Wi-Fi Map",
+    "main_desc": "Welcome! Follow these 3 simple steps to see your building's Wi-Fi coverage. It's very visual, we promise!",
+    "title_1": "Step 1: Upload Your Floor Plan",
+    "description_1": "First, we need to give the app a map of your location.<br><ul><li>Go to the <strong>Plans</strong> page.</li><li>Click the <strong>'Upload a Map'</strong> button.</li><li>Choose an image (PNG, JPG) or a PDF of your floor plan.</li></ul><br>Once uploaded, your plan will appear in the 'Existing Maps' list.",
+    "img_1": "/static/font/load_plan.png",
+    "title_2": "Step 2: Scan the Wi-Fi",
+    "description_2": "Now, let's 'capture' the Wi-Fi at different spots.<br><ul><li>Go to the <strong>Scan</strong> page.</li><li>Click the <strong>'Scan'</strong> button on your plan.</li><li>The plan will open. <strong>Click where you are <u>currently</u> standing on the map.</strong></li><li>Wait <strong>3 seconds</strong> for the progress bar to disappear. That's it!</li></ul><br>Move to another spot (e.g., a few meters away) and click your new position. Repeat this to cover the whole area you care about.",
+    "img_2": "/static/font/scan.png",
+    "title_3": "Step 3: View the Map",
+    "description_3": "Time to see the result!<br><ul><li>Go to the <strong>Maps</strong> page.</li><li>Click the <strong>'Visualise'</strong> button on your plan.</li><li>On the left, <strong>choose a Wi-Fi network</strong> from the list.</li></ul><br>The heatmap appears instantly! Red/Orange means a strong signal, Blue/Green means a weak signal.<br><br>✨ <strong>Tip:</strong> Hover your mouse over the scan points to see the exact signal strength and MAC address.",
+    "img_3": "/static/font/visualise_map.png"
+  },
+  "how_to": {
+    "main_title": "How-To Guides (How do I...)",
+    "title_1": "How do I save and compare scans?",
+    "description_1": "Want to save a scan to view it later?<br>On the <strong>Scan</strong> page, under each plan, you have two buttons:<br><ul><li><strong>Save:</strong> Click this after a scan. It downloads a small <code>.json</code> file with all your measurements.</li><li><strong>Load:</strong> To review an old scan (or a colleague's scan), click this and select the <code>.json</code> file you saved.</li></ul>",
+    "img_1": "/static/font/scan_page.png",
+    "title_2": "How do I delete a floor plan?",
+    "description_2": "If a plan is no longer needed:<br><ul><li>Go to the <strong>Plans</strong> page.</li><li>Click the trash can icon 🗑️ on the card of the plan you want to delete.</li></ul><div class=\"warning\">⚠️ <strong>Warning:</strong> This deletes the plan AND all scan data associated with it.</div>",
+    "img_2": "/static/font/delete_plan.png",
+    "title_3": "How do I see channel congestion?",
+    "description_3": "On the visualization page, you see 'Signal Strength' by default. You can also see 'Channels':<br><ul><li>Click the <strong>'🔁 Switch to Channel'</strong> button.</li><li>The list on the left will change to show Wi-Fi channels (e.g., Channel 1, Channel 6, Channel 44).</li><li>Click a channel to see how many networks are using it at each scan point.</li></ul><br>This is very useful for seeing 'crowded' areas (see explanations).",
+    "img_3": "/static/font/visualise_map.png"
+  },
+  "explanation": {
+    "main_title": "Explanations (Understanding Wi-Fi)",
+    "title_1": "What is 'Signal Strength' (dBm)?",
+    "description_1": "Signal strength tells you how good or bad your Wi-Fi connection will be. It's measured in <strong>dBm</strong> (a negative number).<br><br>It's simple: <strong>the closer the number is to 0, the better the signal.</strong><br><ul><li><strong>-30 to -50 dBm:</strong> Excellent (you are close to the access point).</li><li><strong>-50 to -65 dBm:</strong> Very Good (streaming, video calls OK).</li><li><strong>-65 to -75 dBm:</strong> Fair (web browsing OK, but might buffer).</li><li><strong>-75 to -90 dBm:</strong> Poor (unstable connection or dropouts).</li></ul>",
+    "title_2": "What is the 'Channels' map for?",
+    "description_2": "Think of Wi-Fi channels like <strong>lanes on a highway</strong>.<br><br>If there are too many networks in the same lane (on the same channel), it creates a <strong>'traffic jam'</strong>. Everyone slows down, even if their signal is strong!<br><br>This map shows you the most-used 'lanes' (channels) in each spot. If you see a '5' on a point for Channel 6, it means 5 Wi-Fi networks are competing on that channel. The best practice is to set your Wi-Fi to use a less crowded channel (e.g., one where you see '1' or '2')."
+  },
+  "reference": {
+    "main_title": "Quick Reference",
+    "title_1": "Accepted File Formats",
+    "description_1": "You can upload the following file formats:<br><ul><li><code>.png</code> (recommended)</li><li><code>.jpg</code> / <code>.jpeg</code></li><li><code>.pdf</code> (Only the first page will be used and converted to a PNG image).</li></ul>",
+    "title_2": "Supported Operating Systems",
+    "description_2": "This application runs on:<br><ul><li><strong>Windows</strong> 10 and 11.</li><li><strong>Linux</strong> (tested on Ubuntu, requires 'iw tools').</li></ul>"
+  },
+  "footer": {
+    "copyright": "© 2025 WiFi Heatmap. All rights reserved."
   }
-  
+}

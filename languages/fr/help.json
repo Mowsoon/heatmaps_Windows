@@ -1,32 +1,54 @@
 {
-    "header": {
-      "button": "← Revenir en arrière",
-      "tagline": "Analyse et gestion des réseaux Wi-Fi"
-    },
-    "start": {
-    "title": "Comment utiliser l'application",
-    "description": "Bienvenue dans l'application <strong>WiFi Heatmap</strong> !<br><br>Pour commencer, suivez ces étapes simples :<ul><li><strong>Charger un plan</strong> : ajoutez une image de votre plan (PNG, JPG, JPEG ou PDF).</li><li><strong>Scanner</strong> : effectuez un scan Wi-Fi en cliquant sur votre position actuelle sur le plan.</li><li><strong>Visualiser</strong> : consultez les résultats sur une carte thermique.</li></ul><div class=\"warning\">⚠️ Une fois une étape terminée, vous n'avez pas besoin de la refaire, sauf si vous souhaitez recommencer.</div>"
-    },
-    "plan": {
-        "main_title": "Comment intéragir avec les plans",
-        "title_1": "Comment charger un plan",
-        "description_1": "Vous pouvez charger un plan depuis <strong>deux pages différentes</strong> : celle des plans et celle des scans.<br>Dans les deux cas, cliquez sur le bouton correspondant.<div class=\"warning\">⚠️ Seuls les formats <em>PNG</em>, <em>JPG</em>, <em>JPEG</em> et <em>PDF</em> sont pris en charge.</div>",
-        "title_2": "Comment supprimer un plan",
-        "description_2": "La suppression d'un plan se fait uniquement depuis la page des plans.<br>Cliquez sur le bouton corbeille situé sur le plan que vous souhaitez supprimer.<br>Cette action supprimera également toutes les données de scan associées à ce plan."
-    },
-    "scans": {
-        "main_title": "Comment intéragir avec les scans",
-        "title_1": "Fonctionnalités de la page de scans",
-        "description_1": "La page de scan vous permet d'effectuer des scans sur le plan sélectionné.<div class=\"warning\">⚠️ Chaque nouveau scan efface les données du scan précédent.</div><br>Vous pouvez sauvegarder et charger différents scans pour comparer plusieurs analyses sur le même plan.<br>Le nom du fichier de scan peut être modifié librement.",
-        "title_2": "Comment scanner",
-        "description_2": "Pour démarrer un scan :<ul><li>Indiquez sur la carte la position actuelle de l'ordinateur.</li><li>Attendez la fin du scan (3 secondes sur Linux, 15 secondes sur Windows).</li><li>Ne bougez pas pendant le scan.</li></ul>Une barre de chargement s'affiche pendant la procédure et disparaît à la fin."
-    },
-    "maps": {
-        "main_title": "Comment intéragir avec les cartes",
-        "title_1": "Comment visualiser une carte",
-        "description_1": "Choisissez d'abord la carte désirée.<br>Ensuite, sélectionnez le réseau Wi-Fi que vous souhaitez visualiser.<br>En passant la souris sur un cercle, vous pouvez voir la puissance du signal ainsi que l'adresse MAC de la radio émettrice."
-    },
-    "footer": {
-      "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."
-    }
+  "header": {
+    "button": "← Revenir en arrière",
+    "tagline": "Analyse et gestion des réseaux Wi-Fi"
+  },
+  "nav": {
+    "tutorial": "Tutoriel (Démarrage)",
+    "how_to": "Guides Pratiques",
+    "explanation": "Explications",
+    "reference": "Référence"
+  },
+  "tutorial": {
+    "main_title": "Tutoriel : Créer votre première carte Wi-Fi",
+    "main_desc": "Bienvenue ! Suivez ces 3 étapes simples pour voir la couverture Wi-Fi de vos locaux. C'est très visuel, promis !",
+    "title_1": "Étape 1 : Charger votre plan",
+    "description_1": "D'abord, il faut donner à l'application une carte de vos locaux.<br><ul><li>Allez sur la page <strong>Plans</strong>.</li><li>Cliquez sur le bouton <strong>'Télécharger un plan'</strong>.</li><li>Choisissez une image (PNG, JPG) ou un PDF de votre plan.</li></ul><br>Une fois chargé, votre plan apparaîtra dans la liste des 'Plans existants'.",
+    "img_1": "/static/font/load_plan.png",
+    "title_2": "Étape 2 : Scanner le Wi-Fi",
+    "description_2": "Maintenant, nous allons 'capturer' le Wi-Fi à différents endroits.<br><ul><li>Allez sur la page <strong>Scan</strong>.</li><li>Cliquez sur le bouton <strong>'Scan'</strong> de votre plan.</li><li>Le plan s'affiche. <strong>Cliquez à l'endroit où vous vous trouvez <u>actuellement</u> sur le plan.</strong></li><li>Attendez <strong>3 secondes</strong> que la barre de progression disparaisse. C'est tout !</li></ul><br>Déplacez-vous à un autre endroit (par exemple, quelques mètres plus loin) et cliquez à nouveau sur votre nouvelle position. Faites cela pour couvrir toute la zone qui vous intéresse.",
+    "img_2": "/static/font/scan.png",
+    "title_3": "Étape 3 : Visualiser la carte",
+    "description_3": "C'est le moment de voir le résultat !<br><ul><li>Allez sur la page <strong>Cartes</strong>.</li><li>Cliquez sur le bouton <strong>'Visualiser'</strong> de votre plan.</li><li>Sur la gauche, <strong>choisissez un réseau Wi-Fi</strong> dans la liste.</li></ul><br>La carte thermique s'affiche instantanément ! Le rouge/orange signifie un signal fort, le bleu/vert un signal faible.<br><br>✨ <strong>Astuce :</strong> Passez votre souris sur les points de scan pour voir la force exacte du signal et l'adresse MAC.",
+    "img_3": "/static/font/visualise_map.png"
+  },
+  "how_to": {
+    "main_title": "Guides Pratiques (Comment faire...)",
+    "title_1": "Comment sauvegarder et comparer des scans ?",
+    "description_1": "Vous voulez enregistrer un scan pour le revoir plus tard ?<br>Sur la page <strong>Scan</strong>, sous chaque plan, vous avez deux boutons :<br><ul><li><strong>Sauvegarder :</strong> Cliquez ici après un scan. Cela télécharge un petit fichier <code>.json</code> contenant toutes vos mesures.</li><li><strong>Charger :</strong> Pour revoir un ancien scan (ou celui d'un collègue), cliquez ici et sélectionnez le fichier <code>.json</code> que vous aviez sauvegardé.</li></ul>",
+    "img_1": "/static/font/scan_page.png",
+    "title_2": "Comment supprimer un plan ?",
+    "description_2": "Si un plan n'est plus utile :<br><ul><li>Allez sur la page <strong>Plans</strong>.</li><li>Cliquez sur l'icône poubelle 🗑️ sur la carte du plan que vous voulez supprimer.</li></ul><div class=\"warning\">⚠️ <strong>Attention :</strong> Cela supprime le plan ET toutes les données de scan qui allaient avec.</div>",
+    "img_2": "/static/font/delete_plan.png",
+    "title_3": "Comment voir l'encombrement des 'Canaux' ?",
+    "description_3": "Sur la page de visualisation, vous voyez la 'Force du Signal' par défaut. Vous pouvez aussi voir les 'Canaux' :<br><ul><li>Cliquez sur le bouton <strong>'🔁 Passer en mode Canal'</strong>.</li><li>La liste de gauche change et affiche les canaux (ex: Canal 1, Canal 6, Canal 44).</li><li>Cliquez sur un canal pour voir combien de réseaux l'utilisent à chaque endroit.</li></ul><br>C'est très utile pour voir les zones 'surchargées' (voir explications).",
+    "img_3": "/static/font/visualise_map.png"
+  },
+  "explanation": {
+    "main_title": "Explications (Comprendre le Wi-Fi)",
+    "title_1": "À quoi sert la 'Force du Signal' (dBm) ?",
+    "description_1": "La force du signal vous dit si votre connexion Wi-Fi sera bonne ou mauvaise. Elle est mesurée en <strong>dBm</strong> (un chiffre négatif).<br><br>C'est simple : <strong>plus le chiffre est proche de 0, meilleur est le signal.</strong><br><ul><li><strong>-30 à -50 dBm :</strong> Excellent (vous êtes près du point d'accès).</li><li><strong>-50 à -65 dBm :</strong> Très bon (streaming, appels vidéo OK).</li><li><strong>-65 à -75 dBm :</strong> Moyen (navigation web OK, mais peut faiblir).</li><li><strong>-75 à -90 dBm :</strong> Faible (connexion instable ou coupures).</li></ul>",
+    "title_2": "À quoi sert la carte des 'Canaux' ?",
+    "description_2": "Imaginez les canaux Wi-Fi comme des <strong>voies d'autoroute</strong>.<br><br>S'il y a trop de réseaux sur la même voie (le même canal), cela crée un <strong>'embouteillage'</strong>. Tout le monde est ralenti, même si le signal est fort !<br><br>Cette carte vous montre les 'voies' (canaux) les plus utilisées à chaque endroit. Si vous voyez un '5' sur un point pour le Canal 6, cela veut dire que 5 réseaux Wi-Fi se battent sur ce canal. L'idéal est de configurer votre Wi-Fi sur un canal peu utilisé (par exemple, un où vous voyez '1' ou '2')."
+  },
+  "reference": {
+    "main_title": "Référence Rapide",
+    "title_1": "Formats de plans acceptés",
+    "description_1": "Vous pouvez charger les formats de fichiers suivants :<br><ul><li><code>.png</code> (recommandé)</li><li><code>.jpg</code> / <code>.jpeg</code></li><li><code>.pdf</code> (Seule la première page sera utilisée et convertie en image PNG).</li></ul>",
+    "title_2": "Systèmes d'exploitation supportés",
+    "description_2": "L'application fonctionne sur :<br><ul><li><strong>Windows</strong> 10 et 11.</li><li><strong>Linux</strong> (testé sur Ubuntu, nécessite les 'iw tools').</li></ul>"
+  },
+  "footer": {
+    "copyright": "© 2025 WiFi Heatmap. Tous droits réservés."
   }
+}

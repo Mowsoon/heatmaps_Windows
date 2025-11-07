@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WiFi Heatmap</title>
+  <title>WiFi Heatmap - Guide</title>
   <link rel="stylesheet" href="/static/home.css">
   <link rel="stylesheet" href="/static/plans.css">
   <link rel="stylesheet" href="/static/help.css">
@@ -30,59 +30,73 @@
         </div>
     </header>
 
-    
+
     <div class="help-container">
         <nav class="help-nav">
             <ul>
-            <li><a href="#start">{{ translations.start.title }}</a></li>
-            <li><a href="#plan">{{ translations.plan.main_title }}</a></li>
-            <li><a href="#scans">{{ translations.scans.main_title }}</a></li>
-            <li><a href="#maps">{{ translations.maps.main_title }}</a></li>
+                <li><a href="#tutorial">{{ translations.nav.tutorial }}</a></li>
+                <li><a href="#how-to">{{ translations.nav.how_to }}</a></li>
+                <li><a href="#explanation">{{ translations.nav.explanation }}</a></li>
+                <li><a href="#reference">{{ translations.nav.reference }}</a></li>
             </ul>
         </nav>
-    
-      
+
+
         <main class="help-content">
-            <section class="start" id="start">
-                <h1>{{ translations.start.title | safe}}</h1>
-                <p>{{ translations.start.description | safe}}</p>
-                <img src="/static/font/help.png" alt="Help Image">
+
+            <section id="tutorial">
+                <h1>{{ translations.tutorial.main_title | safe }}</h1>
+                <p>{{ translations.tutorial.main_desc | safe }}</p>
+
+                <h3>{{ translations.tutorial.title_1 | safe }}</h3>
+                <p>{{ translations.tutorial.description_1 | safe }}</p>
+                <img src="{{ translations.tutorial.img_1 }}" alt="Charger un plan">
+
+                <h3>{{ translations.tutorial.title_2 | safe }}</h3>
+                <p>{{ translations.tutorial.description_2 | safe }}</p>
+                <img src="{{ translations.tutorial.img_2 }}" alt="Scanner le Wi-Fi">
+
+                <h3>{{ translations.tutorial.title_3 | safe }}</h3>
+                <p>{{ translations.tutorial.description_3 | safe }}</p>
+                <img src="{{ translations.tutorial.img_3 }}" alt="Visualiser la carte">
             </section>
 
-            <section class="plan" id="plan">
-                <h2>{{ translations.plan.main_title | safe}}</h2>
-                <div class="load-file">
-                    <h3>{{ translations.plan.title_1 | safe}}</h3>
-                    <p>{{ translations.plan.description_1 | safe}}</p>
-                    <img src="/static/font/load_plan.png" alt="Help Image">
-                </div>
-                <div class="delete-file">
-                    <h3>{{ translations.plan.title_2 | safe}}</h3>
-                    <p>{{ translations.plan.description_2 | safe}}</p>
-                    <img src="/static/font/delete_plan.png" alt="Help Image">
-                </div>
+            <section id="how-to">
+                <h2>{{ translations.how_to.main_title | safe }}</h2>
+
+                <h3>{{ translations.how_to.title_1 | safe }}</h3>
+                <p>{{ translations.how_to.description_1 | safe }}</p>
+                <img src="{{ translations.how_to.img_1 }}" alt="Sauvegarder et charger des scans">
+
+                <h3>{{ translations.how_to.title_2 | safe }}</h3>
+                <p>{{ translations.how_to.description_2 | safe }}</p>
+                <img src="{{ translations.how_to.img_2 }}" alt="Supprimer un plan">
+
+                <h3>{{ translations.how_to.title_3 | safe }}</h3>
+                <p>{{ translations.how_to.description_3 | safe }}</p>
+                <img src="{{ translations.how_to.img_3 }}" alt="Passer en mode canal">
             </section>
 
-            <section class="scans" id="scans">
-                <h2>{{ translations.scans.main_title | safe}}</h2>
-                <div class="scan-page">
-                    <h3>{{ translations.scans.title_1 | safe}}</h3>
-                    <p>{{ translations.scans.description_1 | safe}}</p>
-                    <img src="/static/font/scan_page.png" alt="Help Image">
-                </div>
-                <div class="scan">
-                    <h3>{{ translations.scans.title_2 | safe}}</h3>
-                    <p>{{ translations.scans.description_2 | safe}}</p>
-                    <img src="/static/font/scan.png" alt="Help Image">
-                </div>
+            <section id="explanation">
+                <h2>{{ translations.explanation.main_title | safe }}</h2>
+
+                <h3>{{ translations.explanation.title_1 | safe }}</h3>
+                <p>{{ translations.explanation.description_1 | safe }}</p>
+
+                <h3>{{ translations.explanation.title_2 | safe }}</h3>
+                <p>{{ translations.explanation.description_2 | safe }}</p>
             </section>
 
-            <section class="maps" id="maps">
-                <h2>{{ translations.maps.main_title | safe}}</h2>
-                <h3>{{ translations.maps.title_1 | safe}}</h3>
-                <p>{{ translations.maps.description_1 | safe}}</p>
-                <img src="/static/font/visualise_map.png" alt="Help Image">
+            <section id="reference">
+                <h2>{{ translations.reference.main_title | safe }}</h2>
+
+                <h3>{{ translations.reference.title_1 | safe }}</h3>
+                <p>{{ translations.reference.description_1 | safe }}</p>
+
+                <h3>{{ translations.reference.title_2 | safe }}</h3>
+                <p>{{ translations.reference.description_2 | safe }}</p>
             </section>
+
         </main>
     </div>
 
