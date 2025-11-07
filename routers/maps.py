@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, status, HTTPException
 from config import template
-from helpers.html_handler import find_language, list_data
+from helpers.html_handler import find_language, list_map
 from helpers.file_handler import find_map_url, find_map
 from helpers.data_handler import find_ssid_list, find_data_list, find_channel_list
 from helpers.heatmap_handler import draw_heatmap, channel_heatmap
@@ -21,7 +21,7 @@ async def maps(request: Request):
             "request": request,
             "translations": translations,
             "current_lang": lang,
-            "maps": list_data()
+            "maps": list_map()
         }
     )
 @router.get("/{map_name}")
