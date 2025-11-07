@@ -1,7 +1,6 @@
 .idea
 __pycache__
 static/maps/*
-static/font/*
 static/data/channel/*
 static/data/signal/*
 static/generated/*

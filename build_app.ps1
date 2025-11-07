@@ -16,6 +16,7 @@ nuitka `
   --include-package=pdf2image `
   --include-package=uvicorn `
   --include-package=pywifi `
+  --include-package=jinja2 `
   --include-data-dir=templates=templates `
   --include-data-dir=static=static `
   --include-data-dir=languages=languages `

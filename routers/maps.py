@@ -1,5 +1,3 @@
-# File: mowsoon/heatmaps_windows/heatmaps_Windows-d6faa9591d82b18e4be7509a6c9bc2161c9a7e6d/routers/maps.py
-
 from fastapi import APIRouter, Request, status, HTTPException
 from config import template
 from helpers.html_handler import find_language, list_map
